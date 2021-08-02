@@ -3,9 +3,7 @@
         <h1 class="text-red-600">Dashboard</h1>
     </div> -->
     <div class="flex">
-        <div class="w-64 opacity-0 z-10 h-screen "></div>
-        <div class=" z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 min-h-screen fixed">
-            
+        <div class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 h-screen lg:static lg:inset-0">
             <div class="flex items-center justify-center mt-8">
                 <div class="flex items-center">
                     <img class="mx-auto h-12 w-auto" src="/image/logo-booking-home.svg" alt="Workflow" />

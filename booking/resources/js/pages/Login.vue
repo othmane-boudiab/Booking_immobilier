@@ -59,7 +59,8 @@ export default {
    },
    methods:{
      submitLogin(){
-       console.log('submit');
+       let {email,password} = this;
+           this.$store.dispatch('LoginUser',{email,password})
      }
    }
 }

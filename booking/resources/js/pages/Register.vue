@@ -7,7 +7,7 @@
                 <!-- <p class="text-gray-500 dark:text-gray-400">Sign in to access your account</p> -->
             </div>
             <div class="m-7">
-                <form action="" novalidate>
+                <form action="" method="post" novalidate>
                     <div class="mb-6">
                         <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Name</label>
                         <input type="name" name="name" id="name" placeholder="name" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" v-model="name" />
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="mb-6">
-                        <button  type="button" class="w-full px-3 py-4 text-white  bg-blue-600 rounded-md focus:bg-blue-600 focus:outline-none" @click.prevent="submitRegister" :disabled="!isFormValid">Sign in</button>
+                        <button  type="button" class="w-full px-3 py-4 text-white  bg-blue-600 rounded-md focus:bg-blue-600 focus:outline-none" @click.prevent="submitRegister"  >Sign in</button>
                     </div>
                     <p class="text-sm text-center text-gray-400">I&#x27;have an account <router-link to="/login" class="text-blue-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">Sign ip</router-link>.</p>
                 </form>
@@ -67,7 +67,10 @@ export default {
    },
    methods:{
      submitRegister(){
-       console.log('submit');
+      //  console.log('submit')
+       let  {name,email,password} = this;
+            this.$store.dispatch('RegisterUser',{name,email,password})
+
      }
    }
 }

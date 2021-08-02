@@ -14,5 +14,20 @@ class VilleSeeder extends Seeder
     public function run()
     {
         //
+        \App\Models\Ville::Create([
+            'name' => 'casablanca'
+        ]);
+        \App\Models\Ville::Create([
+            'name' => 'rabat'
+        ]);
+        \App\Models\Ville::Create([
+            'name' => 'marrakech'
+        ]);
+        \App\Models\Ville::Create([
+            'name' => 'youssoufia'
+        ]);
+        \App\Models\Ville::Create([
+            'name' => 'Safi'
+        ]);
     }
 }

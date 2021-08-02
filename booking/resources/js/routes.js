@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import Dashboard from './Dashboard/Dashboard';
 import Users from './Dashboard/Users';
 import Homes from './Dashboard/Homes';
+import add from './Dashboard/add';
+import edituser from './Dashboard/edituser';
 
 export default {
     mode: 'history',
@@ -46,6 +48,14 @@ export default {
                 {
                   path: 'homes',
                   component: Homes
+                },
+                {
+                    path: 'add',
+                    component: add
+                },
+                {
+                    path: 'edituser',
+                    component: edituser
                 }
               ]
         },
