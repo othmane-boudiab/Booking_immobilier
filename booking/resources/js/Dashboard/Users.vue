@@ -18,66 +18,78 @@
                   Name
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Title
+                  Created_at
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  Updated_at
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Role
                 </th>
-                <th scope="col" class="relative px-6 py-3">
+                <th scope="col" class="relative px-6 py-3"> 
                   <span class="sr-only">Edit</span>
                 </th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="user in users" :key="user.id">
+              <tr v-for="val in users" :key="val.id">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" :src="/image/+user.image" alt="" />
+                      <img class="h-10 w-10 rounded-full" :src="/image/+val.image" alt="" />
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {{user.name}}
+                        {{val.name}}
                       </div>
                       <div class="text-sm text-gray-500">
-                        {{user.email}}
+                        {{val.email}}
                       </div>
+                      <!-- <div class="text-sm text-red-500">
+                        {{val.id}}
+                      </div> -->
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{user.created_at}}</div>
+                  <div class="text-sm text-gray-900">{{val.created_at}}</div>
                   <!-- <div class="text-sm text-gray-500">test 1</div> -->
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    {{user.updated_at}}
+                    {{val.updated_at}}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{user.type}}
+                  {{val.type}}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <router-link class="text-indigo-600 hover:text-indigo-900 mr-1" to="/Dashboard/edituser">Edit</router-link>
+                  <!-- <router-link class="text-indigo-600 hover:text-indigo-900 mr-1" to="/dashboard/edituser" @click="edituser(val,$event)">Edit</router-link> -->
+                  <router-link class="text-indigo-600 hover:text-indigo-900 mr-1" :to="{name: 'edituser', params: { id: val.id }}">Edit</router-link>
+                  <!-- <a href="edituser" class="text-indigo-600 hover:text-indigo-900 mr-1" @click="edituser(nub,$event)">Edit</a> -->
+                  <!-- <button class="text-indigo-600 hover:text-indigo-900 mr-1" type="button" v-on:click="toggleModal()">Edit</button> -->
+                  <!-- <test @click="edituser(users,$event)"></test> -->
                   <!-- <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-1">Edit</a> -->
-                  <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+                  <!-- <a href="#" class="text-red-600 hover:text-red-900">Delete</a> -->
+                  <button class="text-red-600 hover:text-red-900" @click="deleteuser(val.id)">Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+        <!-- <edituser class="v hidden"></edituser> -->
       </div>
     </div>
   </div>
+  
 </div>
 </template>
 
 <script>
 import Navdash from '../components/navdash.vue';
 import verticalNavbar from '../components/verticalNavbar.vue';
+// import Edituser from './edituser.vue';
+// import test from '../Dashboard/test.vue';
 // const people = [
 //   {
 //     name: 'Jane Cooper',
@@ -89,27 +101,67 @@ import verticalNavbar from '../components/verticalNavbar.vue';
 //       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
 //   },
 // ]
-
+// name: "large-modal",
 export default {
-  components: { verticalNavbar, Navdash },
+  components: { verticalNavbar, Navdash},
   data() {
     return {
-      users:[]
+      // showModal: false,
+      users:[],
+      
+      //  val: {}
     }
   },
   mounted() {
     this.getUsers();
+    this.updateToken();
+    // this.getauth();
+    console.log(this.$store.getters.isLogged);
   },
   methods:{
+    // toggleModal: function(){
+    //   this.showModal = !this.showModal;
+    // },
+    updateToken(){
+            let token =JSON.parse(localStorage.getItem('userToken'));
+            this.$store.commit('setUserToken',token)
+        },
+    deleteuser(id){
+      // console.log(this.users.id)
+      axios.delete(`/api/auth/deleteuser/${id}`).then(res => {
+        window.location.pathname = "/Dashboard/users";
+      })
+      
+    },
+    // getauth() {
+    //     axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('userToken')}`;
+    //   },
     getUsers() {
       axios.get('/api/auth/users')
       .then(res => {
         this.users = res.data;
-        // co
+        // console.log(user)
       }
       )
       .then(err => console.log(err))
+    },
+    // edituser(val){
+		// 	this.$store.commit('Edituser',val)
+    //   // console.log(this.name)
+    //   console.log(this.val.name)
+		// },
+    
+  },
+  computed:{
+        // userToEdit(){
+        //     return this.$store.getters.userToEdit;
+            
+
+        // }
+        // isLogged(){
+        //   return this.$store.getters.isLogged;
+        // },
+        
     }
-  }
 }
 </script>

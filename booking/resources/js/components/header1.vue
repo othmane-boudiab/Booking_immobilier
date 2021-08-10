@@ -11,6 +11,8 @@
                     <router-link to="/agents" class="text-white px-2 hover:text-yellow-400">Agent</router-link>
                     <router-link to="/a_propos" class="text-white px-2 hover:text-yellow-400">À propos</router-link>
                     <router-link to="/contactez-nous" class="text-white pl-2 hover:text-yellow-400">Contactez-nous</router-link>
+                    <router-link to="/login" class=" text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2">Login</router-link>
+                    <router-link to="/register" class=" text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2">Register</router-link>
                 </div>
                 <!-- Mobile menu button -->
                     <div class="md:hidden w-8 ">

@@ -70,7 +70,6 @@ export default {
       //  console.log('submit')
        let  {name,email,password} = this;
             this.$store.dispatch('RegisterUser',{name,email,password})
-
      }
    }
 }

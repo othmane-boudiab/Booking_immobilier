@@ -10,6 +10,17 @@
 
 <script>
 export default {
-    name : 'App'
+    name : 'App',
+    computed:{
+        // userToEdit(){
+        //     return this.$store.getters.userToEdit;
+            
+
+        // }
+        isLogged(){
+          return this.$store.getters.isLogged;
+        },
+        
+    }
 }
 </script>

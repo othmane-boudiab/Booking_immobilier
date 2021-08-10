@@ -18,7 +18,8 @@
                     <div class="mb-6">
                         <div class="flex justify-between mb-2">
                             <label for="password" class="text-sm text-gray-600 dark:text-gray-400">Password</label>
-                            <a href="#!" class="text-sm text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300">Forgot password?</a>
+                            <!-- <a href="#!" class="text-sm text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300">Forgot password?</a> -->
+                            <router-link to="/dashboard/users" class="text-sm text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300">Forgot password?</router-link>
                         </div>
                         <input type="password" name="password" id="password" placeholder="Your Password" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" v-model="password"/>
                         <div v-show="passworderror" class="text-red-600">
@@ -39,11 +40,16 @@
 
 </style>
 <script>
+// import { mapActions } from 'vuex'
 export default {
    data(){
      return {
-       email : '',
-       password : ''
+      //  form : {
+      //    email : '',
+      //    password : ''
+      //  },
+        email : '',
+        password : ''
      }
    },
    computed:{
@@ -60,8 +66,21 @@ export default {
    methods:{
      submitLogin(){
        let {email,password} = this;
-           this.$store.dispatch('LoginUser',{email,password})
+            this.$store.dispatch('LoginUser',{email,password});
+            
+            if (this.$store.getters.isLogged == true) {
+              this.$router.push({name: 'dashboard'});
+            };
+            this.submitLogin();
+            // this.$router.push('dashboard/users');
      }
-   }
+    // ...mapActions({
+    //     auth:'auth/login'
+    //   }),
+    //   submitLogin(){
+    //     this.auth(this.form)
+    //   }
+    
+   },
 }
 </script>
