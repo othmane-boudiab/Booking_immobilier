@@ -52,6 +52,9 @@ export default {
         password : ''
      }
    },
+   mounted() {
+    this.rediectdash();
+   },
    computed:{
      emailerror(){
        return !(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.email)) && this.email.length > 0
@@ -67,13 +70,21 @@ export default {
      submitLogin(){
        let {email,password} = this;
             this.$store.dispatch('LoginUser',{email,password});
+            this.$router.push({name: 'dashboard'});
             
-            if (this.$store.getters.isLogged == true) {
-              this.$router.push({name: 'dashboard'});
-            };
-            this.submitLogin();
+            
+            // this.submitLogin();
             // this.$router.push('dashboard/users');
+     },
+     rediectdash(){
+      // if (this.$store.getters.isLogged == true) {
+      //         this.$router.push({name: 'dashboard'});
+      // };
      }
+    //  
+      // if (this.submitLogin) {
+      //         this.$router.push({name: 'dashboard'});
+      // };
     // ...mapActions({
     //     auth:'auth/login'
     //   }),

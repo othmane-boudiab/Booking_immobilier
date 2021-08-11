@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Categorie;
+use App\Models\ville;
+use Auth;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -17,14 +21,28 @@ class PostController extends Controller
         //
     }
 
+    // public function getCategories(){
+    //     $categories  = Categorie::get();
+    //     return response()->json($categories);
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function gethome()
     {
-        //
+        $post = Post::where([
+            'user_id' => Auth::id(),
+        ])->with(['categorie', 'ville'])->get();
+        return response()->json($post);
+        
+    }
+
+    public function getallhomes(){
+        $post = Post::with(['categorie', 'ville'])->get();
+        return response()->json($post);
     }
 
     /**
@@ -33,9 +51,30 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function addhome(Request $request)
     {
-        //
+        $filename = '';
+        if($request->hasFile('image')){
+            $filename = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('image'),$filename);
+        }
+
+        $post = Post::create([
+            'title'         => $request->title,
+            'description'   => $request->description,
+            'surface'       => $request->surface,
+            'rooms'         => $request->rooms,
+            'categorie_id'  => $request->categorie,
+            'ville_id'      => $request->ville,
+            'user_id'       => Auth::id(),
+            'adress'        => $request->adress,
+            'price'          => $request->prix,
+            'image'         => $filename,
+        ]);
+        return response()->json([
+            'message' => 'Post created successfully!',
+            'status_code' => 202
+        ], 202);
     }
 
     /**

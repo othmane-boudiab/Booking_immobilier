@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Models;
-use App\Categorie;
-use App\Ville;
+// use App\Categorie;
+// use App\Ville;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
+
     public $guarded = [''];
     public function categorie() {
         return $this->belongsTo(Categorie::class);

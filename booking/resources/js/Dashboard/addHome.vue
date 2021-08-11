@@ -19,19 +19,25 @@
                     </div>
                     <div class="mb-6">
                         <div class="flex">
-                            <select id="categories" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mr-2" v-model="categorie">
-                                <option value="0" disabled selected>Choose categorie</option>
-                                <option value="0" v-for="categorie in categories" :key="categorie.id">{{categorie.name}}</option>
+                            <select id="categories" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mr-2" v-model="categorie" >
+                                <option value="" disabled selected>Choose categorie</option>
+                                <option :value="categorie.id" v-for="categorie in categories" :key="categorie.id">{{categorie.name}}</option>
                             </select>
-                            <select id="ville" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ml-2" v-model="ville">
-                                <option value="0" disabled selected>Choose ville</option>
-                                <option value="0" v-for="ville in villes" :key="ville.id" >{{ville.name}}</option>
+                            <select id="ville" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mr-2" v-model="ville">
+                                <option value="" disabled selected>Choose ville</option>
+                                <option :value="ville.id" v-for="ville in villes" :key="ville.id">{{ville.name}}</option>
                             </select>
+                            
+                            <!-- <select id="ville" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ml-2" v-model="ville">
+                                <option value="" disabled selected>Choose ville</option>
+                                <option value="" v-for="val in villes" :key="val.id" >{{val.name}}</option>
+                            </select> -->
                         </div>
+                      
                     </div>
                     <div class="mb-6">
                         <div class="flex">
-                            <input type="text" name="quartier" id="quartier" placeholder="Quartier" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mr-2" v-model="quartier" />
+                            <input type="text" name="adress" id="adress" placeholder="Quartier" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mr-2" v-model="adress" />
                             <input type="number" name="prix" id="prix" placeholder="Prix" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ml-2" v-model="prix" />
                         </div>
                         
@@ -47,7 +53,7 @@
 
                     </div>
                     <div class="mb-6">
-                        <button  type="button" class="w-full px-3 py-4 text-white  bg-blue-600 rounded-md focus:bg-blue-600 focus:outline-none" @click.prevent="addahome">Add Home</button>
+                        <button  type="button" class="w-full px-3 py-4 text-white  bg-blue-600 rounded-md focus:bg-blue-600 focus:outline-none" @click.prevent="addhome">Add Home</button>
                     </div>
                 </form>
             </div>
@@ -62,28 +68,68 @@ export default {
         return {
             posts:{},
             tille : '',
-            discription: '',
+            description: '',
             image : '',
-            categorie : '',
-            categories : {},
             ville : '',
             villes : {},
+            categorie : '',
+            categories : {},
             rooms : '',
-            quartier : '',
+            adress : '',
             prix : '',
             surface : '',
         }
     },
     created(){
         this.getCategories();
+        this.getVilles();
+        // console.log(categories)
     },
     methods:{
+        getVilles() {
+            axios.get('http://127.0.0.1:8000/api/auth/getVilles')
+           .then(res => {
+                    // console.log(res.data)
+                    this.villes = res.data;
+                })
+                .then(err => console.log(err))
+        },
         getCategories() {
-            axios.get('/api/auth/getcategories')
-            .then(res => {
-                
-            })
+            axios.get('http://127.0.0.1:8000/api/auth/getCategories')
+           .then(res => {
+                    // console.log(res.data)
+                    this.categories = res.data;
+
+                    // console.log(categories)
+                })
+                .then(err => console.log(err))
+        },
+        onImageChang(event) {
+            // console.log(event.target.files[0])
+            this.image = event.target.files[0]
+        },
+        addhome(){
+            let config ={
+                headers :{"content-type" : 'multipart/form-data'}
+            }
+            let formdata = new FormData();
+            formdata.append('title' ,this.title)
+            formdata.append('description' ,this.description)
+            formdata.append('surface' ,this.surface)
+            formdata.append('adress' ,this.adress)
+            formdata.append('prix' ,this.prix)
+            formdata.append('rooms' ,this.rooms)
+            formdata.append('ville' ,this.ville)
+            formdata.append('categorie' ,this.categorie)
+            formdata.append('image' ,this.image)
+            axios.post('http://127.0.0.1:8000/api/auth/addhome', formdata, config)
+            // .then(res => {
+
+            // })
+
         }
+        
+        
     }
 }
 </script>

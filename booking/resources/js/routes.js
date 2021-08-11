@@ -57,22 +57,22 @@ export default {
             path: '/dashboard',
             component: Dashboard,
             // beforeEnter:(to,from,next) => {
-            //     if (!store.getters.isLogged) {
+            //     if (store.getters.isLogged == false) {
             //       return next({
             //         name:'login'
             //       })
             //     }
             //     next()
             //   },
-            // beforeEnter:(to,from,next) => {
-            //     if (localStorage.getItem('userToken') == null ) {
-            //       return next({
-            //         name:'login'
-            //       })
-            //     }
+            beforeEnter:(to,from,next) => {
+                if (localStorage.getItem('userToken') == null ) {
+                  return next({
+                    name:'login'
+                  })
+                }
                 
-            //     next()
-            //   },
+                next()
+              },
             children: [
                 // {
                 //     path:"/",

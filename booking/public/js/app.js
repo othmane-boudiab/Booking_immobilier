@@ -2109,7 +2109,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      // showModal: false,
+      homes: [] //  val: {}
+
+    };
+  },
+  mounted: function mounted() {
+    this.gethome();
+    this.getallhomes();
+    this.updateToken(); // this.getauth();
+
+    console.log(this.$store.getters.isLogged);
+  },
+  methods: {
+    // toggleModal: function(){
+    //   this.showModal = !this.showModal;
+    // },
+    updateToken: function updateToken() {
+      var token = JSON.parse(localStorage.getItem('userToken'));
+      this.$store.commit('setUserToken', token);
+    },
+    // deleteuser(id){
+    //   // console.log(this.users.id)
+    //   axios.delete(`/api/auth/deleteuser/${id}`).then(res => {
+    //     window.location.pathname = "/Dashboard/users";
+    //   })
+    // },
+    // getauth() {
+    //     axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('userToken')}`;
+    //   },
+    gethome: function gethome() {
+      var _this = this;
+
+      axios.get('http://localhost:8000/api/auth/gethome').then(function (res) {
+        _this.homes = res.data;
+        console.log(res.data);
+      }).then(function (err) {
+        return console.log(err);
+      });
+    },
+    getallhomes: function getallhomes() {
+      var _this2 = this;
+
+      axios.get('http://localhost:8000/api/auth/getallhomes').then(function (res) {
+        _this2.homes = res.data;
+        console.log(res.data);
+      }).then(function (err) {
+        return console.log(err);
+      });
+    } // edituser(val){
+    // 	this.$store.commit('Edituser',val)
+    //   // console.log(this.name)
+    //   console.log(this.val.name)
+    // },
+
+  },
+  computed: {// userToEdit(){
+    //     return this.$store.getters.userToEdit;
+    // }
+    // isLogged(){
+    //   return this.$store.getters.isLogged;
+    // },
+  }
+});
 
 /***/ }),
 
@@ -2454,29 +2519,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       posts: {},
       tille: '',
-      discription: '',
+      description: '',
       image: '',
-      categorie: '',
-      categories: {},
       ville: '',
       villes: {},
+      categorie: '',
+      categories: {},
       rooms: '',
-      quartier: '',
+      adress: '',
       prix: '',
       surface: ''
     };
   },
   created: function created() {
     this.getCategories();
+    this.getVilles(); // console.log(categories)
   },
   methods: {
+    getVilles: function getVilles() {
+      var _this = this;
+
+      axios.get('http://127.0.0.1:8000/api/auth/getVilles').then(function (res) {
+        // console.log(res.data)
+        _this.villes = res.data;
+      }).then(function (err) {
+        return console.log(err);
+      });
+    },
     getCategories: function getCategories() {
-      axios.get('/api/auth/getcategories').then(function (res) {});
+      var _this2 = this;
+
+      axios.get('http://127.0.0.1:8000/api/auth/getCategories').then(function (res) {
+        // console.log(res.data)
+        _this2.categories = res.data; // console.log(categories)
+      }).then(function (err) {
+        return console.log(err);
+      });
+    },
+    onImageChang: function onImageChang(event) {
+      // console.log(event.target.files[0])
+      this.image = event.target.files[0];
+    },
+    addhome: function addhome() {
+      var config = {
+        headers: {
+          "content-type": 'multipart/form-data'
+        }
+      };
+      var formdata = new FormData();
+      formdata.append('title', this.title);
+      formdata.append('description', this.description);
+      formdata.append('surface', this.surface);
+      formdata.append('adress', this.adress);
+      formdata.append('prix', this.prix);
+      formdata.append('rooms', this.rooms);
+      formdata.append('ville', this.ville);
+      formdata.append('categorie', this.categorie);
+      formdata.append('image', this.image);
+      axios.post('http://127.0.0.1:8000/api/auth/addhome', formdata, config); // .then(res => {
+      // })
     }
   }
 });
@@ -3316,6 +3428,9 @@ __webpack_require__.r(__webpack_exports__);
       password: ''
     };
   },
+  mounted: function mounted() {
+    this.rediectdash();
+  },
   computed: {
     emailerror: function emailerror() {
       return !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.email) && this.email.length > 0;
@@ -3335,16 +3450,19 @@ __webpack_require__.r(__webpack_exports__);
         email: email,
         password: password
       });
-
-      if (this.$store.getters.isLogged == true) {
-        this.$router.push({
-          name: 'dashboard'
-        });
-      }
-
-      ;
-      this.submitLogin(); // this.$router.push('dashboard/users');
-    } // ...mapActions({
+      this.$router.push({
+        name: 'dashboard'
+      }); // this.submitLogin();
+      // this.$router.push('dashboard/users');
+    },
+    rediectdash: function rediectdash() {// if (this.$store.getters.isLogged == true) {
+      //         this.$router.push({name: 'dashboard'});
+      // };
+    } //  
+    // if (this.submitLogin) {
+    //         this.$router.push({name: 'dashboard'});
+    // };
+    // ...mapActions({
     //     auth:'auth/login'
     //   }),
     //   submitLogin(){
@@ -3607,7 +3725,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
           // router.push({ path: '/Dashboard/users' })
           window.location.pathname = "/Dashboard/users";
         } else if (_this.state.user == 'can_crud_home') {
-          window.location.pathname = "/Dashboard";
+          window.location.pathname = "/Dashboard/homes";
         } else {
           window.location.pathname = "/";
         } // axios.get('/api/user')
@@ -3769,21 +3887,22 @@ __webpack_require__.r(__webpack_exports__);
     path: '/dashboard',
     component: _Dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_4__.default,
     // beforeEnter:(to,from,next) => {
-    //     if (!store.getters.isLogged) {
+    //     if (store.getters.isLogged == false) {
     //       return next({
     //         name:'login'
     //       })
     //     }
     //     next()
     //   },
-    // beforeEnter:(to,from,next) => {
-    //     if (localStorage.getItem('userToken') == null ) {
-    //       return next({
-    //         name:'login'
-    //       })
-    //     }
-    //     next()
-    //   },
+    beforeEnter: function beforeEnter(to, from, next) {
+      if (localStorage.getItem('userToken') == null) {
+        return next({
+          name: 'login'
+        });
+      }
+
+      next();
+    },
     children: [// {
     //     path:"/",
     //     component: Dashboard,
@@ -23775,7 +23894,7 @@ var render = function() {
                       _c(
                         "tbody",
                         { staticClass: "bg-white divide-y divide-gray-200" },
-                        _vm._l(_vm.users, function(val) {
+                        _vm._l(_vm.homes, function(val) {
                           return _c("tr", { key: val.id }, [
                             _c(
                               "td",
@@ -23811,7 +23930,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                      " +
-                                              _vm._s(val.name) +
+                                              _vm._s(val.title) +
                                               "\n                    "
                                           )
                                         ]
@@ -23825,7 +23944,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                      " +
-                                              _vm._s(val.email) +
+                                              _vm._s(val.categorie.name) +
                                               "\n                    "
                                           )
                                         ]
@@ -23878,7 +23997,7 @@ var render = function() {
                               [
                                 _vm._v(
                                   "\n                " +
-                                    _vm._s(val.type) +
+                                    _vm._s(val.ville.name) +
                                     "\n              "
                                 )
                               ]
@@ -24668,14 +24787,14 @@ var render = function() {
                 [
                   _c(
                     "option",
-                    { attrs: { value: "0", disabled: "", selected: "" } },
+                    { attrs: { value: "", disabled: "", selected: "" } },
                     [_vm._v("Choose categorie")]
                   ),
                   _vm._v(" "),
                   _vm._l(_vm.categories, function(categorie) {
                     return _c(
                       "option",
-                      { key: categorie.id, attrs: { value: "0" } },
+                      { key: categorie.id, domProps: { value: categorie.id } },
                       [_vm._v(_vm._s(categorie.name))]
                     )
                   })
@@ -24695,7 +24814,7 @@ var render = function() {
                     }
                   ],
                   staticClass:
-                    "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ml-2",
+                    "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mr-2",
                   attrs: { id: "ville" },
                   on: {
                     change: function($event) {
@@ -24716,14 +24835,14 @@ var render = function() {
                 [
                   _c(
                     "option",
-                    { attrs: { value: "0", disabled: "", selected: "" } },
+                    { attrs: { value: "", disabled: "", selected: "" } },
                     [_vm._v("Choose ville")]
                   ),
                   _vm._v(" "),
                   _vm._l(_vm.villes, function(ville) {
                     return _c(
                       "option",
-                      { key: ville.id, attrs: { value: "0" } },
+                      { key: ville.id, domProps: { value: ville.id } },
                       [_vm._v(_vm._s(ville.name))]
                     )
                   })
@@ -24740,25 +24859,25 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.quartier,
-                    expression: "quartier"
+                    value: _vm.adress,
+                    expression: "adress"
                   }
                 ],
                 staticClass:
                   "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 mr-2",
                 attrs: {
                   type: "text",
-                  name: "quartier",
-                  id: "quartier",
+                  name: "adress",
+                  id: "adress",
                   placeholder: "Quartier"
                 },
-                domProps: { value: _vm.quartier },
+                domProps: { value: _vm.adress },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.quartier = $event.target.value
+                    _vm.adress = $event.target.value
                   }
                 }
               }),
@@ -24826,7 +24945,7 @@ var render = function() {
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    return _vm.addahome.apply(null, arguments)
+                    return _vm.addhome.apply(null, arguments)
                   }
                 }
               },

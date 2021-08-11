@@ -146,7 +146,7 @@ const store = new Vuex.Store({
                         // router.push({ path: '/Dashboard/users' })
                         window.location.pathname = "/Dashboard/users";
                     }else if (this.state.user == 'can_crud_home'){
-                        window.location.pathname = "/Dashboard";
+                        window.location.pathname = "/Dashboard/homes";
                     }else {
                         window.location.pathname = "/";
                     }

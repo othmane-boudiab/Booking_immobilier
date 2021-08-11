@@ -13,8 +13,13 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories  = Categorie::get();
+        return response()->json($categories);
     }
+    // public function getCategories(){
+    //     $categories  = Categorie::get();
+    //     return response()->json($categories);
+    // }
 
     /**
      * Show the form for creating a new resource.

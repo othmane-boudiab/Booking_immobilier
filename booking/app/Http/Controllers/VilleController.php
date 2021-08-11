@@ -14,7 +14,8 @@ class VilleController extends Controller
      */
     public function index()
     {
-        //
+        $villes  = ville::get();
+        return response()->json($villes);
     }
 
     /**

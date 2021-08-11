@@ -29,8 +29,8 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="val in users" :key="val.id">
+            <tbody class="bg-white divide-y divide-gray-200" >
+              <tr v-for="val in homes" :key="val.id">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
@@ -38,10 +38,10 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {{val.name}}
+                        {{val.title}}
                       </div>
                       <div class="text-sm text-gray-500">
-                        {{val.email}}
+                        {{val.categorie.name}}
                       </div>
                       <!-- <div class="text-sm text-red-500">
                         {{val.id}}
@@ -59,7 +59,7 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{val.type}}
+                  {{val.ville.name}}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <!-- <router-link class="text-indigo-600 hover:text-indigo-900 mr-1" to="/dashboard/edituser" @click="edituser(val,$event)">Edit</router-link> -->
@@ -86,6 +86,75 @@
 </style>
 <script>
 export default {
-   
+  data() {
+    return {
+      // showModal: false,
+      homes:[],
+      
+      //  val: {}
+    }
+  },
+  mounted() {
+    this.gethome();
+    this.getallhomes();
+    this.updateToken();
+    // this.getauth();
+
+    console.log(this.$store.getters.isLogged);
+  },
+  methods:{
+    // toggleModal: function(){
+    //   this.showModal = !this.showModal;
+    // },
+    updateToken(){
+            let token =JSON.parse(localStorage.getItem('userToken'));
+            this.$store.commit('setUserToken',token)
+        },
+    // deleteuser(id){
+    //   // console.log(this.users.id)
+    //   axios.delete(`/api/auth/deleteuser/${id}`).then(res => {
+    //     window.location.pathname = "/Dashboard/users";
+    //   })
+      
+    // },
+    // getauth() {
+    //     axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('userToken')}`;
+    //   },
+    gethome() {
+      axios.get('http://localhost:8000/api/auth/gethome')
+      .then(res => {
+        this.homes = res.data;
+        console.log(res.data);
+      }
+      )
+      .then(err => console.log(err))
+    },
+    getallhomes() {
+      axios.get('http://localhost:8000/api/auth/getallhomes')
+      .then(res => {
+        this.homes = res.data;
+        console.log(res.data);
+      }
+      )
+      .then(err => console.log(err))
+    },
+    // edituser(val){
+		// 	this.$store.commit('Edituser',val)
+    //   // console.log(this.name)
+    //   console.log(this.val.name)
+		// },
+    
+  },
+  computed:{
+        // userToEdit(){
+        //     return this.$store.getters.userToEdit;
+            
+
+        // }
+        // isLogged(){
+        //   return this.$store.getters.isLogged;
+        // },
+        
+    }
 }
 </script>
