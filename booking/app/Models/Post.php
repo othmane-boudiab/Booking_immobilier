@@ -32,6 +32,6 @@ class Post extends Model
     }
 
     public function commande() {
-        return $this->hasMany(Commande::class);
+        return $this->hasMany(Commande::class, 'post_id');
     }
 }

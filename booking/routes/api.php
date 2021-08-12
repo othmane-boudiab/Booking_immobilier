@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommandeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,14 +41,22 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('getVilles', 'VilleController@index');
     Route::post('updateuser/{id}', 'AuthController@updateuser');
     Route::delete('deleteuser/{id}', 'AuthController@deleteuser');
+    Route::delete('deletehome/{id}', 'PostController@deletehome');
+    Route::post('updatehome/{id}', 'PostController@updatehome');
+    Route::get('gethomes', [PostController::class, 'getallhomes']);
+    Route::get('edithome/{id}', 'PostController@edithomes');
+    // Route::get('store', 'CommandeController@store');
     // Route::post('addhome', 'PostController@addhome');
 
     // Route::get('getCategories', [PostController::class, 'getCategories']);
 
     Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('store', 'CommandeController@store');
+        Route::post('create', 'CommandeController@create');
+        Route::get('edithomes/{id}', 'PostController@edithomes');
         Route::get('logout', 'AuthController@logout');
         Route::post('addhome', 'PostController@addhome');
-        Route::get('gethome', 'PostController@gethome');
+        Route::get('gethome', 'PostController@gethome')->middleware('scope:can_crud_home');
         // Route::get('users', 'AuthController@index');
         // Route::get('users', 'AuthController@index')->middleware('scope:do-any');
         Route::get('users', [AuthController::class, 'index'])->middleware('scope:do_any');
@@ -57,5 +66,6 @@ Route::group(['prefix' => 'auth'], function () {
             
         // });
     });
+
 });
 

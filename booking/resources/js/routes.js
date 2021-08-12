@@ -11,6 +11,7 @@ import edituser from './Dashboard/edituser';
 import test from './Dashboard/test';
 import addHome from './Dashboard/addHome';
 import editHome from './Dashboard/editHome';
+import commande from './Dashboard/commande';
 import app from './app';
 import { store } from './app';
 
@@ -29,7 +30,7 @@ export default {
         },
         {
             name: 'homedetail',
-            path: '/homedetail',
+            path: '/homedetail/:id',
             component: Homedetail
         },
         // {
@@ -133,7 +134,7 @@ export default {
                 },
                 {
                     name: 'editHome',
-                    path: 'editHome',
+                    path: 'editHome/:id',
                     component: editHome,
                     // beforeEnter:(to,from,next) => {
                     //         if (localStorage.getItem('userToken') == null && localStorage.getItem('usertype') == !'can_creat_ord') {
@@ -158,6 +159,11 @@ export default {
                     //     next()
                     //   },
                 },
+                {
+                    name: 'commande',
+                    path: 'commande',
+                    component: commande,
+                }
                 
             ]
         },

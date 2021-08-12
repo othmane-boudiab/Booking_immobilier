@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Models;
-use App\User;
-use App\Post;
+// use App\User;
+// use App\Post;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +16,6 @@ class Commande extends Model
     }
 
     public function posts() {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class, 'post_id');
     }
 }

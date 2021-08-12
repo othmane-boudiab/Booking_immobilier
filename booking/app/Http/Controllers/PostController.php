@@ -45,6 +45,16 @@ class PostController extends Controller
         return response()->json($post);
     }
 
+    public function edithomes($id){
+        $post = Post::with(['categorie', 'ville'])->find($id);
+        return response()->json($post);
+    }
+
+    // public function getallhomes(){
+    //     $post = Post::with(['categorie', 'ville'])->get();
+    //     return response()->json($post);
+    // }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -76,6 +86,46 @@ class PostController extends Controller
             'status_code' => 202
         ], 202);
     }
+
+    public function updatehome($id, Request $request){
+        $post = Post::find($id);
+        $filename = $post->image;
+        // $filename = '';
+        if($request->hasFile('image')){
+            $filename = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('image'),$filename);
+        }
+
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->surface = $request->surface;
+        $post->categorie_id = $request->categorie;
+        $post->ville_id = $request->ville;
+        $post->adress = $request->adress;
+        $post->price = $request->price;
+        $post->image = $filename != '' ? $filename : $post->image;
+        $post->save();
+
+        // $post = Post::create([
+        //     'title'         => $request->title,
+        //     'description'   => $request->description,
+        //     'surface'       => $request->surface,
+        //     'rooms'         => $request->rooms,
+        //     'categorie_id'  => $request->categorie,
+        //     'ville_id'      => $request->ville,
+        //     'user_id'       => Auth::id(),
+        //     'adress'        => $request->adress,
+        //     'price'          => $request->prix,
+        //     'image'         => $filename,
+        // ]);
+        return response()->json([
+            'message' => 'Post created successfully!',
+            'status_code' => 202
+        ], 202);
+    }
+
+    
+
 
     /**
      * Display the specified resource.
@@ -120,5 +170,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function deletehome($id){
+        $post = Post::find($id);
+        $post->delete();
     }
 }

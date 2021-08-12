@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commande;
+use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommandeController extends Controller
 {
@@ -22,9 +25,17 @@ class CommandeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $order = Commande::create([
+            'message'   => $request->message,
+            'post_id'   => $request->post_id,
+            'user_id'   => Auth::id(),
+        ]);
+        return response()->json([
+            'message' => 'order created successfully!',
+            'status_code' => 213
+        ], 213);
     }
 
     /**
@@ -33,9 +44,14 @@ class CommandeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // $order = Command::
+        $id = Auth::id();
+        $order = Commande::whereHas('posts', function (Builder $query) use($id) {
+            $query->where('user_id', $id);
+        })->with(['user'])->get();
+        return $order;
     }
 
     /**

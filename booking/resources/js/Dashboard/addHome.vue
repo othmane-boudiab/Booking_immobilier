@@ -27,11 +27,6 @@
                                 <option value="" disabled selected>Choose ville</option>
                                 <option :value="ville.id" v-for="ville in villes" :key="ville.id">{{ville.name}}</option>
                             </select>
-                            
-                            <!-- <select id="ville" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ml-2" v-model="ville">
-                                <option value="" disabled selected>Choose ville</option>
-                                <option value="" v-for="val in villes" :key="val.id" >{{val.name}}</option>
-                            </select> -->
                         </div>
                       
                     </div>

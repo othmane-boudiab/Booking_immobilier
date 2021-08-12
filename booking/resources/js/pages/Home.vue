@@ -17,7 +17,7 @@
                 <h2 class="font-medium text-xl">Partners</h2>
                 <hr class="w-8 mx-auto mt-2  border-2 border-yellow-400">
             </div>
-            <div class="flex justify-center justify-between mt-5">
+            <div class="flex justify-between mt-5">
                 <Partner></Partner>
                 <Partner></Partner>
                 <Partner></Partner>
@@ -30,9 +30,7 @@
                 <h2 class="font-medium text-xl">Homes</h2>
                 <hr class="w-8 mx-auto mt-2  border-2 border-yellow-400">
             </div>
-            <div class="grid grid-flow-col grid-cols-3 grid-rows-2 gap-4 mt-10">
                 <maison></maison>
-            </div>
         </div>
     </div>
 </template>

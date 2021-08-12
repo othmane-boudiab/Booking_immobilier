@@ -21,6 +21,6 @@ export default {
        header2,
        detailhome,
        createOrder,
-   }
+   },
 }
 </script>

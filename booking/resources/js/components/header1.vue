@@ -28,7 +28,7 @@
                 <p class="text-white my-3">Booking une application qui offre, un choix au clients qui cherchent des locations ou achat des immobiliers partout au maroc.</p>
                 <router-link to="/maison_de_reves" class="text-white bg-blue-500 rounded-sm flex justify-center p-1 px-10 pb-2 mt-3 items-center m-auto hover:bg-blue-700">view</router-link>
             </div>
-            <div class="container mt-20">
+            <!-- <div class="container mt-20">
                 <div class="text-center">
                     <i class="fas fa-crown text-2xl text-yellow-400"></i>
                     <h4 class="text-white text-xl font-medium">Top 3 Agent</h4>
@@ -47,7 +47,7 @@
                         <h5 class="text-white">Name Agent</h5>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
