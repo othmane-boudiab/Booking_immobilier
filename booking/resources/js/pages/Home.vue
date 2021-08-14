@@ -8,8 +8,9 @@
                 <h2 class="font-medium text-xl">Nos services</h2>
                 <hr class="w-8 mx-auto mt-2  border-2 border-yellow-400">
             </div>
-            <div class="grid grid-flow-col grid-cols-3 grid-rows-1 gap-4 mt-10">
-                <service1></service1>
+            <div  >
+                <service1 class="grid md:grid-cols-3 sm:grid-cols-2  gap-4 mt-10 "></service1>
+
             </div>
         </div>
         <div class="container max-w-screen-lg px-6 py-4 mx-auto">

@@ -1996,12 +1996,27 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {},
   created: function created() {
     this.updateToken();
+    this.upuser();
   },
   methods: {
     updateToken: function updateToken() {
       var token = JSON.parse(localStorage.getItem('userToken'));
-      this.$store.commit('setUserToken', token);
-    }
+      this.$store.commit('setUserToken', token); // console.log(token)
+    },
+    upuser: function upuser() {
+      var user = JSON.parse(localStorage.getItem('user'));
+      this.$store.commit('setuser', user);
+      console.log(user);
+    },
+    // isadmin(){
+    //     let adime = JSON.parse(localStorage.getItem('user'));
+    //     // console.log(localStorage.getItem('user'));
+    //     // if ()
+    // },
+    logout: function logout() {
+      this.$store.commit('logout');
+    },
+    setuser: function setuser() {}
   } //     computed:{
   //      isLogged(){
   //        return this.$store.getters.isLogged;
@@ -2699,6 +2714,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getorder();
+    this.getallorder();
   },
   methods: {
     // toggleModal: function(){
@@ -2726,20 +2742,21 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (err) {
         return console.log(err);
       });
-    } // getallhomes() {
-    //   axios.get('http://localhost:8000/api/auth/getallhomes')
-    //   .then(res => {
-    //     this.homes = res.data;
-    //     console.log(res.data);
-    //   }
-    //   )
-    //   .then(err => console.log(err))
-    // },
-    // edituser(val){
-    // 	this.$store.commit('Edituser',val)
+    },
+    getallorder: function getallorder() {
+      var _this2 = this;
+
+      axios.get('http://localhost:8000/api/auth/getallorder').then(function (res) {
+        _this2.orders = res.data;
+        console.log(res.data);
+      }).then(function (err) {
+        return console.log(err);
+      });
+    } // edituser(val){
+    // 		this.$store.commit('Edituser',val)
     //   // console.log(this.name)
     //   console.log(this.val.name)
-    // },
+    // 	},
 
   }
 });
@@ -3199,13 +3216,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'App',
+  created: function created() {
+    this.upuser();
+  },
+  methods: {
+    upuser: function upuser() {
+      var user = JSON.parse(localStorage.getItem('user'));
+      this.$store.commit('setuser', user);
+    }
+  },
   computed: {
     // userToEdit(){
     //     return this.$store.getters.userToEdit;
     // }
     isLogged: function isLogged() {
-      return this.$store.getters.isLogged;
-    }
+      return this.$store.getters.isLogged; //   return this.$store.getters.typeuser;
+    } // setuser(){
+    //     return this.$store.getters.typeuser;
+    // }
+
   }
 });
 
@@ -3245,6 +3274,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -3492,7 +3524,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mounted: function mounted() {
+    this.updateToken();
+  },
+  methods: {
+    logout: function logout() {
+      this.$store.commit('logout');
+    },
+    updateToken: function updateToken() {
+      var token = JSON.parse(localStorage.getItem('userToken'));
+      this.$store.commit('setUserToken', token);
+    }
+  },
+  computed: {
+    isLogged: function isLogged() {
+      return this.$store.getters.isLogged;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/header2.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/header2.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      open: false
+    };
+  },
+  mounted: function mounted() {
+    this.updateToken();
+  },
+  methods: {
+    logout: function logout() {
+      this.$store.commit('logout');
+    },
+    updateToken: function updateToken() {
+      var token = JSON.parse(localStorage.getItem('userToken'));
+      this.$store.commit('setUserToken', token);
+    },
+    tog: function tog() {
+      this.open = !this.open;
+    }
+  },
+  computed: {
+    isLogged: function isLogged() {
+      return this.$store.getters.isLogged;
+    }
+  }
+});
 
 /***/ }),
 
@@ -3729,8 +3857,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  setup: function setup() {}
+  data: function data() {
+    return {
+      services: []
+    };
+  },
+  mounted: function mounted() {
+    this.getallhomes();
+  },
+  methods: {
+    getallhomes: function getallhomes() {
+      var _this = this;
+
+      axios.get('http://localhost:8000/api/auth/service').then(function (res) {
+        _this.services = res.data;
+        console.log(res.data);
+      }).then(function (err) {
+        return console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3746,6 +3895,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var hooper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hooper */ "./node_modules/hooper/dist/hooper.esm.js");
+/* harmony import */ var hooper_dist_hooper_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! hooper/dist/hooper.css */ "./node_modules/hooper/dist/hooper.css");
 //
 //
 //
@@ -3765,8 +3916,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { Hooper, Slide } from 'hooper';
+// import 'hooper/dist/hooper.css';
+// export default {
+//   name: 'App',
+//   components: {
+//     Hooper,
+//     Slide
+//   }
+// };
+
+ // export default {
+//   components: {
+//     Hooper,
+//     Slide,
+//     HooperNavigation
+//   }
+// }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  setup: function setup() {}
+  components: {
+    Hooper: hooper__WEBPACK_IMPORTED_MODULE_0__.Hooper,
+    Slide: hooper__WEBPACK_IMPORTED_MODULE_0__.Slide,
+    HooperNavigation: hooper__WEBPACK_IMPORTED_MODULE_0__.Navigation
+  },
+  data: function data() {
+    return {
+      storys: []
+    };
+  },
+  mounted: function mounted() {
+    this.getallstorys();
+  },
+  methods: {
+    getallstorys: function getallstorys() {
+      var _this = this;
+
+      axios.get('http://localhost:8000/api/auth/story').then(function (res) {
+        _this.storys = res.data;
+        console.log(res.data);
+      }).then(function (err) {
+        return console.log(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3827,6 +4034,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Partner_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Partner.vue */ "./resources/js/components/Partner.vue");
 /* harmony import */ var _components_story_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/story.vue */ "./resources/js/components/story.vue");
 /* harmony import */ var _components_maison_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/maison.vue */ "./resources/js/components/maison.vue");
+//
 //
 //
 //
@@ -4006,10 +4214,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('LoginUser', {
         email: email,
         password: password
-      });
-      this.$router.push({
-        name: 'dashboard'
-      }); // this.submitLogin();
+      }); // this.$router.push({name: 'dashboard'});
+      // this.submitLogin();
       // this.$router.push('dashboard/users');
     },
     rediectdash: function rediectdash() {// if (this.$store.getters.isLogged == true) {
@@ -4157,20 +4363,21 @@ vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vuex__WEBPACK_IMPORTED_MODULE_4__.d
  // const router = new VueRouter(routes)
 // const passRoutes = ["login","register"]
 // router.beforeEach((to, from, next) => {
-// if(passRoutes.includes(to.name)) return next();
-// if(localStorage.getItem('userToken') == null){
-//     router.push('login')
-// }
-// if (!store.getters.isLogged) {
-//     router.push('login')
-// }
-// if (!store.getters.isLogged) {
-//           return next({
-//             name:'login'
-//           })
-//         }
-//         next()
-// next()
+//     if(passRoutes.includes(to.name)) return next();
+//     if(localStorage.getItem('userToken') == null){
+//         router.push('login')
+//     }
+//     // console.log(store.getters.typeuser)
+//     // if (!store.getters.isLogged) {
+//     //     router.push('login')
+//     // }
+//     // if (!store.getters.isLogged) {
+//     //           return next({
+//     //             name:'login'
+//     //           })
+//     //         }
+//     //         next()
+//     next()
 // })
 // console.log(this.store.state.user)
 // console.log(localStorage.getItem('userToken'))
@@ -4192,9 +4399,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
     typeuser: function typeuser(state) {
       if (state.user) {
         return state.user;
-      }
+      } // return null
+      // return state.user;
 
-      return null;
     } // userToEdit(state) {
     //     return state.Editeduser
     // 
@@ -4211,20 +4418,23 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
 
       axios.defaults.headers.common.Authorization = "Bearer ".concat(userToken); // axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('userToken')}`
     },
-    removeUserToken: function removeUserToken(state) {
+    // removeUserToken(state) {
+    //     state.userToken = null;
+    //     localStorage.removeItem('userToken')
+    // },
+    setuser: function setuser(state, user) {
+      state.user = user;
+
+      if (state.user) {
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+    },
+    logout: function logout(state) {
       state.userToken = null;
       localStorage.removeItem('userToken');
-    },
-    setstateUser: function setstateUser(state, user) {
-      state.user = user; // if (state.user) {
-      //     localStorage.setItem('user', JSON.stringify(user));
-      // }
-    } // logout(state) {
-    //     state.userToken = null;
-    //     localStorage.removeItem('userToken');
-    //     window.location.pathname = "/"
-    // },
-    // Edituser(state,val) {
+      localStorage.removeItem('user');
+      window.location.pathname = "/";
+    } // Edituser(state,val) {
     //     state.Editeduser = val;
     //     console.log(val)
     // }
@@ -4251,21 +4461,20 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
     //         })
     // },
     LoginUser: function LoginUser(_ref2, payload) {
-      var _this = this;
-
       var commit = _ref2.commit;
       axios.post('/api/auth/login', payload).then(function (res) {
         console.log(res);
-        commit('setUserToken', res.data.access_token);
-        commit('setstateUser', res.data.token_scope); // const router = new VueRouter(routes)
+        commit('setUserToken', res.data.access_token); // commit('setstateUser', res.data.token_scope)
+        // const router = new VueRouter(routes)
         // if (res.data.token_scope == 'do_any'){
         //     // window.location.pathname = "/Dashboard/users";
         //     router.push('dashboard')
         //     // router.push({ path: '/dashboard' })
         // }
-        // console.log(setstateUser)
-        // console.log(this.state.user)
-        // console.log(res.data.user.type)
+        // commit('setuser', res.data.token_scope)
+
+        console.log(res.data.token_scope); // console.log(res.data.token_scope)
+        // console.log(res.data.access_tokentoken_scope)
         // console.log(axios.defaults.headers.common.Authorization)
         // const router = new VueRouter(routes)
         // // const passRoutes = ["login","register"]
@@ -4278,11 +4487,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
         // })
         // const router = new VueRouter(routes)
 
-        if (_this.state.user == 'do_any') {
-          // router.push({ path: '/Dashboard/users' })
+        if (res.data.token_scope == 'do_any') {
+          commit('setuser', res.data.token_scope); // router.push({ path: '/Dashboard/users' })
+
           window.location.pathname = "/Dashboard/users";
-        } else if (_this.state.user == 'can_crud_home') {
+        } else if (res.data.token_scope == 'can_crud_home') {
           window.location.pathname = "/Dashboard/homes";
+          commit('setuser', res.data.token_scope);
         } else {
           window.location.pathname = "/";
         } // axios.get('/api/user')
@@ -4453,12 +4664,20 @@ __webpack_require__.r(__webpack_exports__);
     //     }
     //     next()
     //   },
+    // store.getters['app/setuser'] == 'can_creat_ord'
+    // console.Login(store.getters.typeuser)
     beforeEnter: function beforeEnter(to, from, next) {
-      if (localStorage.getItem('userToken') == null) {
+      // console.Login(store.getters.typeuser)
+      if (localStorage.getItem('userToken') == null || localStorage.getItem('user') == null) {
         return next({
           name: 'login'
         });
-      }
+      } // if (localStorage.getItem('user') == 'can_creat_ord') {
+      //     return next({
+      //       name:'/'
+      //     })
+      //   }
+
 
       next();
     },
@@ -4470,7 +4689,7 @@ __webpack_require__.r(__webpack_exports__);
       name: 'users',
       path: 'users',
       component: _Dashboard_Users__WEBPACK_IMPORTED_MODULE_5__.default // beforeEnter:(to,from,next) => {
-      //     if (localStorage.getItem('userToken') == null && localStorage.getItem('usertype') == 'do_any') {
+      //     if (localStorage.getItem('usertype') == 'can_creat_ord') {
       //       return next({
       //         name:'login'
       //       })
@@ -4545,6 +4764,30 @@ __webpack_require__.r(__webpack_exports__);
     }]
   }]
 });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/hooper/dist/hooper.css":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/hooper/dist/hooper.css ***!
+  \*****************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".hooper-slide {\n  flex-shrink: 0;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.hooper-progress {\n  position: absolute;\n  top: 0;\n  right: 0;\n  left: 0;\n  height: 4px;\n  background-color: #efefef;\n}\n.hooper-progress-inner {\n  height: 100%;\n  background-color: #4285f4;\n  transition: 300ms;\n}\n.hooper-pagination {\n  position: absolute;\n  bottom: 0;\n  right: 50%;\n  transform: translateX(50%);\n  display: flex;\n  padding: 5px 10px;\n}\n.hooper-indicators {\n  display: flex;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.hooper-indicator:hover,\n.hooper-indicator.is-active {\n  background-color: #4285f4;\n}\n.hooper-indicator {\n  margin: 0 2px;\n  width: 12px;\n  height: 4px;\n  border-radius: 4px;\n  border: none;\n  padding: 0;\n  background-color: #fff;\n  cursor: pointer;\n}\n.hooper-pagination.is-vertical {\n  bottom: auto;\n  right: 0;\n  top: 50%;\n  transform: translateY(-50%);\n}\n.hooper-pagination.is-vertical .hooper-indicators {\n  flex-direction: column;\n}\n.hooper-pagination.is-vertical .hooper-indicator {\n  width: 6px;\n}\n.hooper-next,\n.hooper-prev {\n  background-color: transparent;\n  border: none;\n  padding: 1em;\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  cursor: pointer;\n}\n.hooper-next.is-disabled,\n.hooper-prev.is-disabled {\n  opacity: 0.3;\n  cursor: not-allowed;\n}\n.hooper-next {\n  right: 0;\n}\n.hooper-prev {\n  left: 0;\n}\n.hooper-navigation.is-vertical .hooper-next {\n  top: auto;\n  bottom: 0;\n  transform: initial;\n}\n.hooper-navigation.is-vertical .hooper-prev {\n  top: 0;\n  bottom: auto;\n  right: 0;\n  left: auto;\n  transform: initial;\n}\n.hooper-navigation.is-rtl .hooper-prev {\n  left: auto;\n  right: 0;\n}\n.hooper-navigation.is-rtl .hooper-next {\n  right: auto;\n  left: 0;\n}\n.hooper {\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  height: 200px;\n}\n.hooper * {\n  box-sizing: border-box;\n}\n.hooper-list {\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n}\n.hooper-track {\n  display: flex;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 0;\n  margin: 0;\n}\n.hooper.is-vertical .hooper-track {\n  flex-direction: column;\n  height: 200px;\n}\n\n.hooper.is-rtl {\n  direction: rtl;\n}\n\n.hooper-sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  border: 0;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
 
 /***/ }),
 
@@ -4693,6 +4936,1186 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
+
+/***/ }),
+
+/***/ "./node_modules/hooper/dist/hooper.esm.js":
+/*!************************************************!*\
+  !*** ./node_modules/hooper/dist/hooper.esm.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "Hooper": () => (/* binding */ Carousel),
+/* harmony export */   "Icon": () => (/* binding */ Icon),
+/* harmony export */   "Navigation": () => (/* binding */ Navigation),
+/* harmony export */   "Pagination": () => (/* binding */ Pagination),
+/* harmony export */   "Progress": () => (/* binding */ Progress),
+/* harmony export */   "Slide": () => (/* binding */ Slide),
+/* harmony export */   "addonMixin": () => (/* binding */ Mixin)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/**
+  * Hopper 0.3.4
+  * (c) 2019
+    * @license MIT
+    */
+
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+}
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+function getInRange(value, min, max) {
+  return Math.max(Math.min(value, max), min);
+}
+function now() {
+  return Date.now();
+}
+function Timer(callback, time) {
+  this.create = function createTimer() {
+    return window.setInterval(callback, time);
+  };
+
+  this.stop = function stopTimer() {
+    if (this.timer) {
+      window.clearInterval(this.timer);
+      this.timer = null;
+    }
+  };
+
+  this.start = function startTimer() {
+    if (!this.timer) {
+      this.timer = this.create();
+    }
+  };
+
+  this.restart = function restartTimer(newTime) {
+    time = newTime || time;
+    this.stop();
+    this.start();
+  };
+
+  this.timer = this.create();
+}
+function camelCaseToString(camelCase) {
+  camelCase = camelCase.replace(/([A-Z]+)/g, ' $1');
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+}
+function normalizeSlideIndex(index, slidesCount) {
+  var realIndex;
+
+  if (index < 0) {
+    realIndex = (index + slidesCount) % slidesCount;
+  } else {
+    realIndex = index % slidesCount;
+  } // Test for NaN
+
+
+  if (realIndex !== realIndex) {
+    return 0;
+  }
+
+  return realIndex;
+}
+function cloneNode(h, vNode) {
+  // use the context that the original vnode was created in.
+  var children = vNode.children || vNode.componentOptions.children || vNode.text;
+  var tag = vNode.componentOptions.Ctor;
+  return h(tag, vNode.data, children);
+} // IE11 :)
+
+function assignPoly(target) {
+  if (target === undefined || target === null) {
+    throw new TypeError('Cannot convert first argument to object');
+  }
+
+  var to = Object(target);
+
+  for (var i = 1; i < arguments.length; i++) {
+    var nextSource = arguments[i];
+
+    if (nextSource === undefined || nextSource === null) {
+      continue;
+    }
+
+    nextSource = Object(nextSource);
+    var keysArray = Object.keys(Object(nextSource));
+
+    for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+      var nextKey = keysArray[nextIndex];
+      var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+
+      if (desc !== undefined && desc.enumerable) {
+        to[nextKey] = nextSource[nextKey];
+      }
+    }
+  }
+
+  return to;
+}
+
+var assign = Object.assign || assignPoly;
+
+function signPoly(value) {
+  if (value < 0) {
+    return -1;
+  }
+
+  return value > 0 ? 1 : 0;
+}
+
+var sign = Math.sign || signPoly;
+function normalizeChildren(context) {
+  var slotProps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  if (context.$scopedSlots.default) {
+    return context.$scopedSlots.default(slotProps) || [];
+  }
+
+  return context.$slots.default || [];
+}
+
+var EMITTER = new vue__WEBPACK_IMPORTED_MODULE_0__.default();
+var Carousel = {
+  name: 'Hooper',
+  provide: function provide() {
+    return {
+      $hooper: this
+    };
+  },
+  props: {
+    // count of items to showed per view
+    itemsToShow: {
+      default: 1,
+      type: Number
+    },
+    // count of items to slide when use navigation buttons
+    itemsToSlide: {
+      default: 1,
+      type: Number
+    },
+    // index number of initial slide
+    initialSlide: {
+      default: 0,
+      type: Number
+    },
+    // control infinite scrolling mode
+    infiniteScroll: {
+      default: false,
+      type: Boolean
+    },
+    // control center mode
+    centerMode: {
+      default: false,
+      type: Boolean
+    },
+    // vertical sliding mode
+    vertical: {
+      default: false,
+      type: Boolean
+    },
+    // enable rtl mode
+    rtl: {
+      default: null,
+      type: Boolean
+    },
+    // enable auto sliding to carousel
+    autoPlay: {
+      default: false,
+      type: Boolean
+    },
+    // speed of auto play to trigger slide
+    playSpeed: {
+      default: 2000,
+      type: Number
+    },
+    // toggle mouse dragging
+    mouseDrag: {
+      default: true,
+      type: Boolean
+    },
+    // toggle touch dragging
+    touchDrag: {
+      default: true,
+      type: Boolean
+    },
+    // toggle mouse wheel sliding
+    wheelControl: {
+      default: true,
+      type: Boolean
+    },
+    // toggle keyboard control
+    keysControl: {
+      default: true,
+      type: Boolean
+    },
+    // enable any move to commit a slide
+    shortDrag: {
+      default: true,
+      type: Boolean
+    },
+    // sliding transition time in ms
+    transition: {
+      default: 300,
+      type: Number
+    },
+    // pause autoPlay on mousehover
+    hoverPause: {
+      default: true,
+      type: Boolean
+    },
+    // remove empty space around slides
+    trimWhiteSpace: {
+      default: false,
+      type: Boolean
+    },
+    // an object to pass all settings
+    settings: {
+      default: function _default() {
+        return {};
+      },
+      type: Object
+    },
+    group: {
+      type: String,
+      default: null
+    }
+  },
+  data: function data() {
+    return {
+      isDragging: false,
+      isSliding: false,
+      isTouch: false,
+      isHover: false,
+      isFocus: false,
+      initialized: false,
+      slideWidth: 0,
+      slideHeight: 0,
+      slidesCount: 0,
+      trimStart: 0,
+      trimEnd: 1,
+      currentSlide: null,
+      timer: null,
+      defaults: {},
+      breakpoints: {},
+      delta: {
+        x: 0,
+        y: 0
+      },
+      config: {}
+    };
+  },
+  computed: {
+    slideBounds: function slideBounds() {
+      var config = this.config,
+          currentSlide = this.currentSlide; // Because the "isActive" depends on the slides shown, not the number of slidable ones.
+      // but upper and lower bounds for Next,Prev depend on whatever is smaller.
+
+      var siblings = config.itemsToShow;
+      var lower = config.centerMode ? Math.ceil(currentSlide - siblings / 2) : currentSlide;
+      var upper = config.centerMode ? Math.floor(currentSlide + siblings / 2) : Math.floor(currentSlide + siblings - 1);
+      return {
+        lower: lower,
+        upper: upper
+      };
+    },
+    trackTransform: function trackTransform() {
+      var _this$config = this.config,
+          infiniteScroll = _this$config.infiniteScroll,
+          vertical = _this$config.vertical,
+          rtl = _this$config.rtl,
+          centerMode = _this$config.centerMode;
+      var direction = rtl ? -1 : 1;
+      var slideLength = vertical ? this.slideHeight : this.slideWidth;
+      var containerLength = vertical ? this.containerHeight : this.containerWidth;
+      var dragDelta = vertical ? this.delta.y : this.delta.x;
+      var clonesSpace = infiniteScroll ? slideLength * this.slidesCount : 0;
+      var centeringSpace = centerMode ? (containerLength - slideLength) / 2 : 0; // calculate track translate
+
+      var translate = dragDelta + direction * (centeringSpace - clonesSpace - this.currentSlide * slideLength);
+
+      if (vertical) {
+        return "transform: translate(0, ".concat(translate, "px);");
+      }
+
+      return "transform: translate(".concat(translate, "px, 0);");
+    },
+    trackTransition: function trackTransition() {
+      if (this.initialized && this.isSliding) {
+        return "transition: ".concat(this.config.transition, "ms");
+      }
+
+      return '';
+    }
+  },
+  watch: {
+    group: function group(val, oldVal) {
+      if (val === oldVal) {
+        return;
+      }
+
+      EMITTER.$off("slideGroup:".concat(oldVal), this._groupSlideHandler);
+      this.addGroupListeners();
+    }
+  },
+  methods: {
+    // controlling methods
+    slideTo: function slideTo(slideIndex) {
+      var _this = this;
+
+      var isSource = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+      if (this.isSliding || slideIndex === this.currentSlide) {
+        return;
+      }
+
+      this.$emit('beforeSlide', {
+        currentSlide: this.currentSlide,
+        slideTo: index
+      });
+      var _this$config2 = this.config,
+          infiniteScroll = _this$config2.infiniteScroll,
+          transition = _this$config2.transition;
+      var previousSlide = this.currentSlide;
+      var index = infiniteScroll ? slideIndex : getInRange(slideIndex, this.trimStart, this.slidesCount - this.trimEnd); // Notify others if in a group and is the slide event initiator.
+
+      if (this.group && isSource) {
+        EMITTER.$emit("slideGroup:".concat(this.group), slideIndex);
+      }
+
+      this.currentSlide = index;
+      this.isSliding = true;
+      window.setTimeout(function () {
+        _this.isSliding = false;
+        _this.currentSlide = normalizeSlideIndex(index, _this.slidesCount);
+      }, transition);
+      this.$emit('slide', {
+        currentSlide: this.currentSlide,
+        slideFrom: previousSlide
+      });
+    },
+    slideNext: function slideNext() {
+      this.slideTo(this.currentSlide + this.config.itemsToSlide);
+    },
+    slidePrev: function slidePrev() {
+      this.slideTo(this.currentSlide - this.config.itemsToSlide);
+    },
+    initEvents: function initEvents() {
+      // get the element direction if not explicitly set
+      if (this.defaults.rtl === null) {
+        this.defaults.rtl = getComputedStyle(this.$el).direction === 'rtl';
+      }
+
+      if (this.config.autoPlay) {
+        this.initAutoPlay();
+      }
+
+      if (this.config.mouseDrag) {
+        this.$refs.list.addEventListener('mousedown', this.onDragStart);
+      }
+
+      if (this.config.touchDrag) {
+        this.$refs.list.addEventListener('touchstart', this.onDragStart, {
+          passive: true
+        });
+      }
+
+      if (this.config.keysControl) {
+        this.$el.addEventListener('keydown', this.onKeypress);
+      }
+
+      if (this.config.wheelControl) {
+        this.lastScrollTime = now();
+        this.$el.addEventListener('wheel', this.onWheel, {
+          passive: false
+        });
+      }
+
+      window.addEventListener('resize', this.update);
+    },
+    initAutoPlay: function initAutoPlay() {
+      var _this2 = this;
+
+      this.timer = new Timer(function () {
+        if (_this2.isSliding || _this2.isDragging || _this2.isHover && _this2.config.hoverPause || _this2.isFocus) {
+          return;
+        }
+
+        if (_this2.currentSlide === _this2.slidesCount - 1 && !_this2.config.infiniteScroll) {
+          _this2.slideTo(0);
+
+          return;
+        }
+
+        _this2.slideNext();
+      }, this.config.playSpeed);
+    },
+    initDefaults: function initDefaults() {
+      this.breakpoints = this.settings.breakpoints;
+      this.defaults = assign({}, this.$props, this.settings);
+      this.config = assign({}, this.defaults);
+    },
+    // updating methods
+    update: function update() {
+      if (this.breakpoints) {
+        this.updateConfig();
+      }
+
+      this.updateWidth();
+      this.updateTrim();
+      this.$emit('updated', {
+        containerWidth: this.containerWidth,
+        containerHeight: this.containerHeight,
+        slideWidth: this.slideWidth,
+        slideHeight: this.slideHeight,
+        settings: this.config
+      });
+    },
+    updateTrim: function updateTrim() {
+      var _this$config3 = this.config,
+          trimWhiteSpace = _this$config3.trimWhiteSpace,
+          itemsToShow = _this$config3.itemsToShow,
+          centerMode = _this$config3.centerMode,
+          infiniteScroll = _this$config3.infiniteScroll;
+
+      if (!trimWhiteSpace || infiniteScroll) {
+        this.trimStart = 0;
+        this.trimEnd = 1;
+        return;
+      }
+
+      this.trimStart = centerMode ? Math.floor((itemsToShow - 1) / 2) : 0;
+      this.trimEnd = centerMode ? Math.ceil(itemsToShow / 2) : itemsToShow;
+    },
+    updateWidth: function updateWidth() {
+      var rect = this.$el.getBoundingClientRect();
+      this.containerWidth = rect.width;
+      this.containerHeight = rect.height;
+
+      if (this.config.vertical) {
+        this.slideHeight = this.containerHeight / this.config.itemsToShow;
+        return;
+      }
+
+      this.slideWidth = this.containerWidth / this.config.itemsToShow;
+    },
+    updateConfig: function updateConfig() {
+      var _this3 = this;
+
+      var breakpoints = Object.keys(this.breakpoints).sort(function (a, b) {
+        return b - a;
+      });
+      var matched;
+      breakpoints.some(function (breakpoint) {
+        matched = window.matchMedia("(min-width: ".concat(breakpoint, "px)")).matches;
+
+        if (matched) {
+          _this3.config = assign({}, _this3.config, _this3.defaults, _this3.breakpoints[breakpoint]);
+          return true;
+        }
+      });
+
+      if (!matched) {
+        this.config = assign(this.config, this.defaults);
+      }
+    },
+    restartTimer: function restartTimer() {
+      if (this.timer) {
+        this.timer.restart();
+      }
+    },
+    restart: function restart() {
+      var _this4 = this;
+
+      this.$nextTick(function () {
+        _this4.update();
+      });
+    },
+    // events handlers
+    onDragStart: function onDragStart(event) {
+      this.isTouch = event.type === 'touchstart';
+
+      if (!this.isTouch && event.button !== 0) {
+        return;
+      }
+
+      this.startPosition = {
+        x: 0,
+        y: 0
+      };
+      this.endPosition = {
+        x: 0,
+        y: 0
+      };
+      this.isDragging = true;
+      this.startPosition.x = this.isTouch ? event.touches[0].clientX : event.clientX;
+      this.startPosition.y = this.isTouch ? event.touches[0].clientY : event.clientY;
+      document.addEventListener(this.isTouch ? 'touchmove' : 'mousemove', this.onDrag);
+      document.addEventListener(this.isTouch ? 'touchend' : 'mouseup', this.onDragEnd);
+    },
+    isInvalidDirection: function isInvalidDirection(deltaX, deltaY) {
+      if (!this.config.vertical) {
+        return Math.abs(deltaX) <= Math.abs(deltaY);
+      }
+
+      if (this.config.vertical) {
+        return Math.abs(deltaY) <= Math.abs(deltaX);
+      }
+
+      return false;
+    },
+    onDrag: function onDrag(event) {
+      if (this.isSliding) {
+        return;
+      }
+
+      this.endPosition.x = this.isTouch ? event.touches[0].clientX : event.clientX;
+      this.endPosition.y = this.isTouch ? event.touches[0].clientY : event.clientY;
+      var deltaX = this.endPosition.x - this.startPosition.x;
+      var deltaY = this.endPosition.y - this.startPosition.y; // Maybe scrolling.
+
+      if (this.isInvalidDirection(deltaX, deltaY)) {
+        return;
+      }
+
+      this.delta.y = deltaY;
+      this.delta.x = deltaX;
+
+      if (!this.isTouch) {
+        event.preventDefault();
+      }
+    },
+    onDragEnd: function onDragEnd() {
+      var tolerance = this.config.shortDrag ? 0.5 : 0.15;
+      this.isDragging = false;
+
+      if (this.config.vertical) {
+        var draggedSlides = Math.round(Math.abs(this.delta.y / this.slideHeight) + tolerance);
+        this.slideTo(this.currentSlide - sign(this.delta.y) * draggedSlides);
+      }
+
+      if (!this.config.vertical) {
+        var direction = (this.config.rtl ? -1 : 1) * sign(this.delta.x);
+
+        var _draggedSlides = Math.round(Math.abs(this.delta.x / this.slideWidth) + tolerance);
+
+        this.slideTo(this.currentSlide - direction * _draggedSlides);
+      }
+
+      this.delta.x = 0;
+      this.delta.y = 0;
+      document.removeEventListener(this.isTouch ? 'touchmove' : 'mousemove', this.onDrag);
+      document.removeEventListener(this.isTouch ? 'touchend' : 'mouseup', this.onDragEnd);
+      this.restartTimer();
+    },
+    onTransitionend: function onTransitionend() {
+      this.isSliding = false;
+      this.$emit('afterSlide', {
+        currentSlide: this.currentSlide
+      });
+    },
+    onKeypress: function onKeypress(event) {
+      var key = event.key;
+
+      if (key.startsWith('Arrow')) {
+        event.preventDefault();
+      }
+
+      if (this.config.vertical) {
+        if (key === 'ArrowUp') {
+          this.slidePrev();
+        }
+
+        if (key === 'ArrowDown') {
+          this.slideNext();
+        }
+
+        return;
+      }
+
+      if (this.config.rtl) {
+        if (key === 'ArrowRight') {
+          this.slidePrev();
+        }
+
+        if (key === 'ArrowLeft') {
+          this.slideNext();
+        }
+
+        return;
+      }
+
+      if (key === 'ArrowRight') {
+        this.slideNext();
+      }
+
+      if (key === 'ArrowLeft') {
+        this.slidePrev();
+      }
+    },
+    onWheel: function onWheel(event) {
+      event.preventDefault();
+
+      if (now() - this.lastScrollTime < 200) {
+        return;
+      } // get wheel direction
+
+
+      this.lastScrollTime = now();
+      var value = event.wheelDelta || -event.deltaY;
+      var delta = sign(value);
+
+      if (delta === -1) {
+        this.slideNext();
+      }
+
+      if (delta === 1) {
+        this.slidePrev();
+      }
+    },
+    addGroupListeners: function addGroupListeners() {
+      var _this5 = this;
+
+      if (!this.group) {
+        return;
+      }
+
+      this._groupSlideHandler = function (slideIndex) {
+        // set the isSource to false to prevent infinite emitting loop.
+        _this5.slideTo(slideIndex, false);
+      };
+
+      EMITTER.$on("slideGroup:".concat(this.group), this._groupSlideHandler);
+    }
+  },
+  created: function created() {
+    this.initDefaults();
+  },
+  mounted: function mounted() {
+    var _this6 = this;
+
+    this.initEvents();
+    this.addGroupListeners();
+    this.$nextTick(function () {
+      _this6.update();
+
+      _this6.slideTo(_this6.config.initialSlide || 0);
+
+      setTimeout(function () {
+        _this6.$emit('loaded');
+
+        _this6.initialized = true;
+      }, _this6.transition);
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('resize', this.update);
+
+    if (this.group) {
+      EMITTER.$off("slideGroup:".concat(this.group), this._groupSlideHandler);
+    }
+
+    if (this.timer) {
+      this.timer.stop();
+    }
+  },
+  render: function render(h) {
+    var _this7 = this;
+
+    var body = renderBody.call(this, h);
+    return h('section', {
+      class: {
+        hooper: true,
+        'is-vertical': this.config.vertical,
+        'is-rtl': this.config.rtl
+      },
+      attrs: {
+        tabindex: '0'
+      },
+      on: {
+        focusin: function focusin() {
+          return _this7.isFocus = true;
+        },
+        focusout: function focusout() {
+          return _this7.isFocus = false;
+        },
+        mouseover: function mouseover() {
+          return _this7.isHover = true;
+        },
+        mouseleave: function mouseleave() {
+          return _this7.isHover = false;
+        }
+      }
+    }, body);
+  }
+};
+/**
+ * Renders additional slides for infinite slides mode.
+ * By cloning Slides VNodes before and after either edges.
+ */
+
+function renderBufferSlides(h, slides) {
+  var before = [];
+  var after = []; // reduce prop access
+
+  var slidesCount = slides.length;
+
+  for (var i = 0; i < slidesCount; i++) {
+    var slide = slides[i];
+    var clonedBefore = cloneNode(h, slide);
+    var slideIndex = i - slidesCount;
+    clonedBefore.data.key = "before_".concat(i);
+    clonedBefore.key = clonedBefore.data.key;
+    clonedBefore.componentOptions.propsData.index = slideIndex;
+    clonedBefore.data.props = {
+      index: slideIndex,
+      isClone: true
+    };
+    before.push(clonedBefore);
+    var clonedAfter = cloneNode(h, slide);
+    slideIndex = i + slidesCount;
+    clonedAfter.data.key = "after_".concat(slideIndex);
+    clonedAfter.componentOptions.propsData.index = slideIndex;
+    clonedAfter.key = clonedAfter.data.key;
+    clonedAfter.data.props = {
+      index: slideIndex,
+      isClone: true
+    };
+    after.push(clonedAfter);
+  }
+
+  return [].concat(before, _toConsumableArray(slides), after);
+}
+/**
+ * Produces the VNodes for the Slides.
+ * requires {this} to be bound to hooper.
+ * So use with .call or .bind
+ */
+
+
+function renderSlides(h) {
+  var children = normalizeChildren(this);
+  var childrenCount = children.length;
+  var idx = 0;
+  var slides = [];
+
+  for (var i = 0; i < childrenCount; i++) {
+    var child = children[i];
+    var ctor = child.componentOptions && child.componentOptions.Ctor;
+
+    if (!ctor || ctor.options.name !== 'HooperSlide') {
+      continue;
+    } // give slide an index behind the scenes
+
+
+    child.componentOptions.propsData.index = idx;
+    child.data.key = idx;
+    child.key = idx;
+    child.data.props = _objectSpread({}, child.data.props || {}, {
+      isClone: false,
+      index: idx++
+    });
+    slides.push(child);
+  } // update hooper's information of the slide count.
+
+
+  this.slidesCount = slides.length;
+
+  if (this.config.infiniteScroll) {
+    slides = renderBufferSlides(h, slides);
+  }
+
+  return h('ul', {
+    class: {
+      'hooper-track': true,
+      'is-dragging': this.isDragging
+    },
+    style: this.trackTransform + this.trackTransition,
+    ref: 'track',
+    on: {
+      transitionend: this.onTransitionend
+    }
+  }, slides);
+}
+/**
+ * Builds the VNodes for the hooper body.
+ * Which is the slides, addons if available, and a11y stuff.
+ * REQUIRES {this} to be bound to the hooper instance.
+ * use with .call or .bind
+ */
+
+
+function renderBody(h) {
+  var slides = renderSlides.call(this, h);
+  var addons = this.$slots['hooper-addons'] || [];
+  var a11y = h('div', {
+    class: 'hooper-liveregion hooper-sr-only',
+    attrs: {
+      'aria-live': 'polite',
+      'aria-atomic': 'true'
+    }
+  }, "Item ".concat(this.currentSlide + 1, " of ").concat(this.slidesCount));
+  var children = [slides].concat(_toConsumableArray(addons), [a11y]);
+  return [h('div', {
+    class: 'hooper-list',
+    ref: 'list'
+  }, children)];
+}
+
+var Slide = {
+  name: 'HooperSlide',
+  inject: ['$hooper'],
+  props: {
+    isClone: {
+      type: Boolean,
+      default: false
+    },
+    index: {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    style: function style() {
+      var _ref = this.$hooper || {},
+          config = _ref.config,
+          slideHeight = _ref.slideHeight,
+          slideWidth = _ref.slideWidth;
+
+      if (config.vertical) {
+        return "height: ".concat(slideHeight, "px");
+      }
+
+      return "width: ".concat(slideWidth, "px");
+    },
+    isActive: function isActive() {
+      var _this$$hooper$slideBo = this.$hooper.slideBounds,
+          upper = _this$$hooper$slideBo.upper,
+          lower = _this$$hooper$slideBo.lower;
+      return this.index >= lower && this.index <= upper;
+    },
+    isPrev: function isPrev() {
+      var lower = this.$hooper.slideBounds.lower;
+      var itemsToSlide = this.$hooper.config.itemsToSlide;
+      return this.index < lower && this.index >= lower - itemsToSlide;
+    },
+    isNext: function isNext() {
+      var upper = this.$hooper.slideBounds.upper;
+      var itemsToSlide = this.$hooper.config.itemsToSlide;
+      return this.index > upper && this.index <= upper + itemsToSlide;
+    },
+    isCurrent: function isCurrent() {
+      return this.index === this.$hooper.currentSlide;
+    }
+  },
+  render: function render(h) {
+    var classes = {
+      'hooper-slide': true,
+      'is-clone': this.isClone,
+      'is-active': this.isActive,
+      'is-prev': this.isPrev,
+      'is-next': this.isNext,
+      'is-current': this.isCurrent
+    };
+    var children = normalizeChildren(this);
+    return h('li', {
+      class: classes,
+      style: this.style,
+      attrs: {
+        'aria-hidden': !this.isActive
+      }
+    }, children);
+  }
+};
+
+var Mixin = {
+  inject: ['$hooper']
+};
+
+var icons = {
+  arrowUp: 'M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z',
+  arrowDown: 'M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z',
+  arrowRight: 'M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z',
+  arrowLeft: 'M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z'
+};
+var Icon = {
+  name: 'HooperIcon',
+  functional: true,
+  inheritAttrs: true,
+  props: {
+    name: {
+      type: String,
+      required: true,
+      validator: function validator(val) {
+        return val in icons;
+      }
+    }
+  },
+  render: function render(createElement, _ref) {
+    var props = _ref.props;
+    var icon = icons[props.name];
+    var children = [];
+    children.push(createElement('title', camelCaseToString(props.name)));
+    children.push(createElement('path', {
+      attrs: {
+        d: 'M0 0h24v24H0z',
+        fill: 'none'
+      }
+    }));
+    children.push(createElement('path', {
+      attrs: {
+        d: icon
+      }
+    }));
+    return createElement('svg', {
+      attrs: {
+        class: "icon icon-".concat(props.name),
+        viewBox: '0 0 24 24',
+        width: '24px',
+        height: '24px'
+      }
+    }, children);
+  }
+};
+
+var Progress = {
+  inject: ['$hooper'],
+  name: 'HooperProgress',
+  computed: {
+    currentSlide: function currentSlide() {
+      return normalizeSlideIndex(this.$hooper.currentSlide, this.$hooper.slidesCount);
+    },
+    progress: function progress() {
+      var range = this.$hooper.slidesCount - this.$hooper.trimStart - this.$hooper.trimEnd;
+      return (this.currentSlide - this.$hooper.trimStart) * 100 / range;
+    }
+  },
+  render: function render(h) {
+    return h('div', {
+      class: 'hooper-progress'
+    }, [h('div', {
+      class: 'hooper-progress-inner',
+      style: "width: ".concat(this.progress, "%")
+    })]);
+  }
+};
+
+function renderFraction(h, current, totalCount) {
+  return [h('span', current + 1), h('span', '/'), h('span', totalCount)];
+}
+
+function renderIndicator(h, index, isCurrent, onClick) {
+  return h('li', [h('button', {
+    class: {
+      'hooper-indicator': true,
+      'is-active': isCurrent
+    },
+    on: {
+      click: onClick
+    },
+    attrs: {
+      type: 'button'
+    }
+  }, [h('span', {
+    class: 'hooper-sr-only'
+  }, "item ".concat(index))])]);
+}
+
+function renderDefault(h, current, totalCount, slideToIndex) {
+  var children = [];
+
+  var _loop = function _loop(i) {
+    children.push(renderIndicator(h, i, i === current, function () {
+      return slideToIndex(i);
+    }));
+  };
+
+  for (var i = 0; i < totalCount; i++) {
+    _loop(i);
+  }
+
+  return [h('ol', {
+    class: 'hooper-indicators'
+  }, children)];
+}
+
+var Pagination = {
+  inject: ['$hooper'],
+  name: 'HooperPagination',
+  props: {
+    mode: {
+      default: 'indicator',
+      type: String
+    }
+  },
+  computed: {
+    currentSlide: function currentSlide() {
+      return normalizeSlideIndex(this.$hooper.currentSlide, this.$hooper.slidesCount);
+    },
+    slides: function slides() {
+      var slides = this.$hooper.slides.map(function (_, index) {
+        return index;
+      });
+      return slides.slice(this.$hooper.trimStart, this.$hooper.slidesCount - this.$hooper.trimEnd + 1);
+    }
+  },
+  render: function render(h) {
+    var _this = this;
+
+    var totalCount = this.$hooper.slidesCount;
+    var children = this.mode === 'indicator' ? renderDefault(h, this.currentSlide, totalCount, function (index) {
+      return _this.$hooper.slideTo(index);
+    }) : renderFraction(h, this.currentSlide, totalCount);
+    return h('div', {
+      class: {
+        'hooper-pagination': true,
+        'is-vertical': this.$hooper.config.vertical
+      }
+    }, children);
+  }
+};
+
+function iconName(isVertical, isRTL, isPrev) {
+  if (isPrev) {
+    return isVertical ? 'arrowUp' : isRTL ? 'arrowRight' : 'arrowLeft';
+  }
+
+  return isVertical ? 'arrowDown' : isRTL ? 'arrowLeft' : 'arrowRight';
+}
+
+function renderButton(h, disabled, slot, isPrev, _ref, onClick) {
+  var _class;
+
+  var isVertical = _ref.isVertical,
+      isRTL = _ref.isRTL;
+  var children = slot && slot.length ? slot : [h(Icon, {
+    props: {
+      name: iconName(isVertical, isRTL, isPrev)
+    }
+  })];
+  return h('button', {
+    class: (_class = {}, _defineProperty(_class, "hooper-".concat(isPrev ? 'prev' : 'next'), true), _defineProperty(_class, 'is-disabled', disabled), _class),
+    attrs: {
+      type: 'button'
+    },
+    on: {
+      click: onClick
+    }
+  }, children);
+}
+
+var Navigation = {
+  inject: ['$hooper'],
+  name: 'HooperNavigation',
+  computed: {
+    isPrevDisabled: function isPrevDisabled() {
+      if (this.$hooper.config.infiniteScroll) {
+        return false;
+      }
+
+      return this.$hooper.currentSlide === 0;
+    },
+    isNextDisabled: function isNextDisabled() {
+      if (this.$hooper.config.infiniteScroll) {
+        return false;
+      }
+
+      if (this.$hooper.config.trimWhiteSpace) {
+        return this.$hooper.currentSlide === this.$hooper.slidesCount - Math.min(this.$hooper.config.itemsToShow, this.$hooper.slidesCount);
+      }
+
+      return this.$hooper.currentSlide === this.$hooper.slidesCount - 1;
+    }
+  },
+  methods: {
+    slideNext: function slideNext() {
+      this.$hooper.slideNext();
+      this.$hooper.restartTimer();
+    },
+    slidePrev: function slidePrev() {
+      this.$hooper.slidePrev();
+      this.$hooper.restartTimer();
+    }
+  },
+  render: function render(h) {
+    var _this = this;
+
+    var config = {
+      isRTL: this.$hooper.config.rtl,
+      isVertical: this.$hooper.config.vertical
+    };
+    var children = [renderButton(h, this.isPrevDisabled, this.$slots['hooper-prev'], true, config, function () {
+      return _this.slidePrev();
+    }), renderButton(h, this.isNextDisabled, this.$slots['hooper-next'], false, config, function () {
+      return _this.slideNext();
+    })];
+    return h('div', {
+      class: {
+        'hooper-navigation': true,
+        'is-vertical': this.$hooper.config.vertical,
+        'is-rtl': this.$hooper.config.rtl
+      }
+    }, children);
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Carousel);
+
+
 
 /***/ }),
 
@@ -22115,6 +23538,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/hooper/dist/hooper.css":
+/*!*********************************************!*\
+  !*** ./node_modules/hooper/dist/hooper.css ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_hooper_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./hooper.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/hooper/dist/hooper.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_hooper_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_hooper_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/detailhome.vue?vue&type=style&index=0&id=b64cf58a&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/detailhome.vue?vue&type=style&index=0&id=b64cf58a&scoped=true&lang=css& ***!
@@ -23046,15 +24499,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _header2_vue_vue_type_template_id_8fc0736c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header2.vue?vue&type=template&id=8fc0736c& */ "./resources/js/components/header2.vue?vue&type=template&id=8fc0736c&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _header2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header2.vue?vue&type=script&lang=js& */ "./resources/js/components/header2.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__.default)(
-  script,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _header2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _header2_vue_vue_type_template_id_8fc0736c___WEBPACK_IMPORTED_MODULE_0__.render,
   _header2_vue_vue_type_template_id_8fc0736c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -23645,6 +25100,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_header1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./header1.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/header1.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_header1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/header2.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/header2.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_header2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./header2.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/header2.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_header2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -24320,7 +25791,23 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(2)
+            _c(
+              "li",
+              {
+                staticClass:
+                  "flex cursor-pointer items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100",
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.logout.apply(null, arguments)
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-sign-out-alt mr-2" }),
+                _vm._v("Logout")
+              ]
+            )
           ])
         ])
       ]
@@ -24442,7 +25929,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(2)
             ])
           ]
         ),
@@ -24481,19 +25968,6 @@ var staticRenderFns = [
         _c("i", { staticClass: "fas fa-window-restore mr-2" }),
         _vm._v("Nos services")
       ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "li",
-      {
-        staticClass:
-          "flex cursor-pointer items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-      },
-      [_c("i", { staticClass: "fas fa-sign-out-alt mr-2" }), _vm._v("Logout")]
     )
   },
   function() {
@@ -26765,6 +28239,22 @@ var render = function() {
     _c("div", [
       _c("h2", { staticClass: "mb-6" }, [_vm._v("Contactez Agents")]),
       _vm._v(" "),
+      !_vm.isLogged
+        ? _c(
+            "div",
+            { staticClass: " w-full lg:w-44" },
+            [
+              _c(
+                "router-link",
+                { staticClass: "text-blue-600", attrs: { to: "/login" } },
+                [_vm._v("sign in")]
+              ),
+              _vm._v(" pour Contactez Agent\n        ")
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _vm.isLogged
         ? _c(
             "form",
@@ -26870,32 +28360,36 @@ var render = function() {
           _vm._v(_vm._s(_vm.homes.title))
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "flex items-center justify-between mt-4" }, [
-          _c("div", {}, [
-            _c("h3", { staticClass: "font-medium" }, [
-              _vm._v("Mis à jour le :")
-            ]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.homes.updated_at))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex text-center" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "mx-6" }, [
-              _c("i", { staticClass: "fas fa-border-none " }),
+        _c(
+          "div",
+          { staticClass: "flex items-center justify-between flex-wrap mt-4" },
+          [
+            _c("div", {}, [
+              _c("h3", { staticClass: "font-medium" }, [
+                _vm._v("Mis à jour le :")
+              ]),
               _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(_vm.homes.surface) + " m²")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", [
-            _c("strong", { staticClass: " text-yellow-400 pr-2 text-lg" }, [
-              _vm._v(_vm._s(_vm.homes.price))
+              _c("p", [_vm._v(_vm._s(_vm.homes.updated_at))])
             ]),
-            _c("span", [_vm._v("MAD")])
-          ])
-        ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex text-center" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "mx-6" }, [
+                _c("i", { staticClass: "fas fa-border-none " }),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.homes.surface) + " m²")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("strong", { staticClass: " text-yellow-400 pr-2 text-lg" }, [
+                _vm._v(_vm._s(_vm.homes.price))
+              ]),
+              _c("span", [_vm._v("MAD")])
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "mt-4" }, [
           _c("h2", { staticClass: " font-semibold text-lg" }, [
@@ -26927,16 +28421,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("span", [_vm._v(_vm._s(_vm.homes.adress))])
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "bg-blue-600 px-2 py-1 rounded-sm text-white",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Ouvrir dans Google Maps")]
-            )
+            ])
           ])
         ])
       ])
@@ -27040,25 +28525,41 @@ var render = function() {
                   [_vm._v("Contactez-nous")]
                 ),
                 _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass:
-                      " text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
-                    attrs: { to: "/login" }
-                  },
-                  [_vm._v("Login")]
-                ),
+                !_vm.isLogged
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass:
+                          " text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
+                        attrs: { to: "/login" }
+                      },
+                      [_vm._v("Login")]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass:
-                      " text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
-                    attrs: { to: "/register" }
-                  },
-                  [_vm._v("Register")]
-                )
+                !_vm.isLogged
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass:
+                          " text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
+                        attrs: { to: "/register" }
+                      },
+                      [_vm._v("Register")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isLogged
+                  ? _c(
+                      "a",
+                      {
+                        staticClass:
+                          " text-white bg-blue-500 px-2 py-1.5 cursor-pointer rounded-sm hover:bg-blue-700 ml-2",
+                        on: { click: _vm.logout }
+                      },
+                      [_vm._v("Logout")]
+                    )
+                  : _vm._e()
               ],
               1
             ),
@@ -27191,52 +28692,41 @@ var render = function() {
               [_vm._v("Maison de réves")]
             ),
             _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                staticClass: "text-gray-900 px-2 hover:text-yellow-400",
-                attrs: { to: "/agents" }
-              },
-              [_vm._v("Agent")]
-            ),
+            !_vm.isLogged
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      " text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
+                    attrs: { to: "/login" }
+                  },
+                  [_vm._v("Login")]
+                )
+              : _vm._e(),
             _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                staticClass: "text-gray-900 px-2 hover:text-yellow-400",
-                attrs: { to: "/a_propos" }
-              },
-              [_vm._v("À propos")]
-            ),
+            !_vm.isLogged
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      " text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
+                    attrs: { to: "/register" }
+                  },
+                  [_vm._v("Register")]
+                )
+              : _vm._e(),
             _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                staticClass: "text-gray-900 pl-2 hover:text-yellow-400",
-                attrs: { to: "/contactez-nous" }
-              },
-              [_vm._v("Contactez-nous")]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  " text-white py-1.5 bg-blue-600 p-2 rounded-sm hover:bg-blue-800 ml-2",
-                attrs: { to: "/login" }
-              },
-              [_vm._v("Login")]
-            ),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  " text-white py-1.5 bg-blue-600 p-2 rounded-sm hover:bg-blue-800 ml-2",
-                attrs: { to: "/register" }
-              },
-              [_vm._v("Register")]
-            )
+            _vm.isLogged
+              ? _c(
+                  "a",
+                  {
+                    staticClass:
+                      " text-white bg-blue-500 px-2 py-1.5 cursor-pointer rounded-sm hover:bg-blue-700 ml-2",
+                    on: { click: _vm.logout }
+                  },
+                  [_vm._v("Logout")]
+                )
+              : _vm._e()
           ],
           1
         ),
@@ -27247,7 +28737,8 @@ var render = function() {
             {
               staticClass:
                 "text-gray-900 dark:text-gray-200 hover:text-yellow-400 dark:hover:text-gray-400 focus:outline-none focus:text-yellow-400 dark:focus:text-gray-400",
-              attrs: { type: "button", "aria-label": "toggle menu" }
+              attrs: { type: "button", "aria-label": "toggle menu" },
+              on: { click: _vm.tog }
             },
             [
               _c(
@@ -27270,6 +28761,80 @@ var render = function() {
           )
         ])
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "flex flex-col  justify-center items-center w-screen h-screen top-0 bg-blue-900 opacity-80 fixed",
+        class: _vm.open ? "block" : "hidden"
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "fixed hover:text-yellow-400 top-4 right-6",
+            on: { click: _vm.tog }
+          },
+          [_c("i", { staticClass: "far fa-window-close text-white text-xl " })]
+        ),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          {
+            staticClass: " text-white text-xl pr-2 hover:text-yellow-400",
+            attrs: { to: "/" }
+          },
+          [_vm._v("Accueil")]
+        ),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          {
+            staticClass: "text-white text-xl px-2 hover:text-yellow-400",
+            attrs: { to: "/maison_de_reves" }
+          },
+          [_vm._v("Maison de réves")]
+        ),
+        _vm._v(" "),
+        !_vm.isLogged
+          ? _c(
+              "router-link",
+              {
+                staticClass:
+                  " text-white  mt-2 bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
+                attrs: { to: "/login" }
+              },
+              [_vm._v("Login")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.isLogged
+          ? _c(
+              "router-link",
+              {
+                staticClass:
+                  " text-white mt-3 bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2",
+                attrs: { to: "/register" }
+              },
+              [_vm._v("Register")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.isLogged
+          ? _c(
+              "a",
+              {
+                staticClass:
+                  " text-white bg-blue-500 mt-2 px-2 py-1.5 cursor-pointer rounded-sm hover:bg-blue-700 ml-2",
+                on: { click: _vm.logout }
+              },
+              [_vm._v("Logout")]
+            )
+          : _vm._e()
+      ],
+      1
     )
   ])
 }
@@ -27307,56 +28872,64 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "grid grid-flow-col grid-cols-3 grid-rows-2 gap-4 mt-10" },
+    { staticClass: " grid md:grid-cols-3 sm:grid-cols-2 gap-4 mt-10 " },
     _vm._l(_vm.homes, function(val) {
-      return _c("div", { key: val.id }, [
-        _c("div", { staticClass: "hover:bg-blue-900 relative" }, [
-          _c("img", {
-            staticClass: "bg-cover mix-blend-multiply w-screen",
-            attrs: { src: /image/ + val.image, alt: "" }
-          }),
-          _vm._v(" "),
-          _vm._m(0, true)
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "shadow p-2" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  "text-lg font-medium hover:text-yellow-400 cursor-pointer",
-                attrs: { to: { name: "homedetail", params: { id: val.id } } }
-              },
-              [_vm._v(_vm._s(val.title.substr(0, 30)))]
-            ),
+      return _c(
+        "div",
+        {
+          key: val.id,
+          staticClass:
+            "hover:shadow-2xl hover:scale-105 transition-all transform duration-500"
+        },
+        [
+          _c("div", { staticClass: "hover:bg-blue-900 relative " }, [
+            _c("img", {
+              staticClass: "bg-cover mix-blend-multiply w-screen",
+              attrs: { src: /image/ + val.image, alt: "" }
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "flex justify-between" }, [
-              _c("div", { staticClass: "flex" }, [
-                _c("div", { staticClass: "flex items-center mr-2" }, [
-                  _c("i", { staticClass: "fas fa-building text-yellow-400" }),
+            _vm._m(0, true)
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "shadow p-2" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass:
+                    "text-lg font-medium hover:text-yellow-400 cursor-pointer",
+                  attrs: { to: { name: "homedetail", params: { id: val.id } } }
+                },
+                [_vm._v(_vm._s(val.title.substr(0, 30)))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex justify-between" }, [
+                _c("div", { staticClass: "flex" }, [
+                  _c("div", { staticClass: "flex items-center mr-2" }, [
+                    _c("i", { staticClass: "fas fa-building text-yellow-400" }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "ml-2" }, [
+                      _vm._v(_vm._s(val.categorie.name))
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "ml-2" }, [
-                    _vm._v(_vm._s(val.categorie.name))
-                  ])
+                  _vm._m(1, true)
                 ]),
                 _vm._v(" "),
-                _vm._m(1, true)
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c("strong", { staticClass: "text-yellow-400" }, [
-                  _vm._v(_vm._s(val.price))
-                ]),
-                _c("span", [_vm._v("MAD")])
+                _c("div", [
+                  _c("strong", { staticClass: "text-yellow-400" }, [
+                    _vm._v(_vm._s(val.price))
+                  ]),
+                  _c("span", [_vm._v("MAD")])
+                ])
               ])
-            ])
-          ],
-          1
-        )
-      ])
+            ],
+            1
+          )
+        ]
+      )
     }),
     0
   )
@@ -27570,33 +29143,43 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5 shadow " }, [
-      _c("div", { staticClass: "flex justify-center items-center relative" }, [
-        _c("i", {
+  return _c(
+    "div",
+    _vm._l(_vm.services, function(service) {
+      return _c(
+        "div",
+        {
+          key: service.id,
           staticClass:
-            "fas fa-globe-americas text-yellow-400 bg-blue-900 text-5xl p-4 rounded-full border-2 border-yellow-400 absolute bottom-0.5"
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center pt-5" }, [
-        _c("h3", [_vm._v("Meilleurs choix des maisons")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Nous avons  livré un portefeuille inégalé de propriétés aux personnes."
-          )
-        ])
-      ])
-    ])
-  }
-]
+            " mt-8 opacity-0 relative hover:shadow-2xl hover:scale-105 transition-all transform duration-500"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                " m-auto mt-4 bg-blue-900 bg-top w-24 rounded-full border-2 flex items-center justify-center border-yellow-400 h-24"
+            },
+            [
+              _c("i", {
+                staticClass: "fas text-yellow-400 m-2 text-5xl",
+                class: service.icon
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center p-5 shadow pt-5" }, [
+            _c("h3", {}, [_vm._v(_vm._s(service.title))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(service.description))])
+          ])
+        ]
+      )
+    }),
+    0
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -27619,41 +29202,58 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full bg-center bg-cover story" }, [
+  return _c(
+    "div",
+    [
       _c(
-        "div",
+        "hooper",
         {
-          staticClass:
-            "bg-blue-900 bg-opacity-75 text-center h-64 flex justify-center items-center"
+          staticClass: "w-full bg-center bg-cover story",
+          attrs: { progress: true, autoPlay: true, playSpeed: 2000 }
         },
         [
-          _c("div", { staticClass: "max-w-md" }, [
-            _c("h3", { staticClass: "text-2xl text-yellow-400 font-bold" }, [
-              _vm._v("STORY_clients")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "text-blue-500 font-medium text-lg" }, [
-              _vm._v("Client Heureux")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-white" }, [
-              _vm._v(
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ."
-              )
-            ])
-          ])
-        ]
+          _vm._l(_vm.storys, function(story) {
+            return _c(
+              "slide",
+              {
+                key: story.id,
+                staticClass:
+                  "bg-blue-900 bg-opacity-75 text-center h-64 flex justify-center items-center "
+              },
+              [
+                _c("div", { staticClass: "max-w-md" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "text-2xl text-yellow-400 font-bold" },
+                    [_vm._v(_vm._s(story.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { staticClass: "text-blue-500 font-medium text-lg" },
+                    [_vm._v("Client Heureux")]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-white" }, [
+                    _vm._v(_vm._s(story.message))
+                  ])
+                ])
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _c("hooper-navigation", {
+            attrs: { slot: "hooper-addons" },
+            slot: "hooper-addons"
+          })
+        ],
+        2
       )
-    ])
-  }
-]
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -27830,11 +29430,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            {
-              staticClass:
-                "grid grid-flow-col grid-cols-3 grid-rows-1 gap-4 mt-10"
-            },
-            [_c("service1")],
+            [
+              _c("service1", {
+                staticClass: "grid md:grid-cols-3 sm:grid-cols-2  gap-4 mt-10 "
+              })
+            ],
             1
           )
         ]
@@ -27940,7 +29540,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "container container max-w-screen-lg px-6 py-4 mx-auto flex"
+            "container container max-w-screen-lg px-6 py-4 mx-auto flex flex-col md:flex-row"
         },
         [
           _c("detailhome", { staticClass: "flex-initial mr-2" }),

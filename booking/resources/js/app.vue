@@ -11,6 +11,15 @@
 <script>
 export default {
     name : 'App',
+    created(){
+        this.upuser();
+    },
+    methods: {
+        upuser(){
+            let user =JSON.parse(localStorage.getItem('user'));
+            this.$store.commit('setuser',user)
+        },
+    },
     computed:{
         // userToEdit(){
         //     return this.$store.getters.userToEdit;
@@ -19,7 +28,13 @@ export default {
         // }
         isLogged(){
           return this.$store.getters.isLogged;
+        //   return this.$store.getters.typeuser;
+
         },
+
+        // setuser(){
+        //     return this.$store.getters.typeuser;
+        // }
         
     }
 }

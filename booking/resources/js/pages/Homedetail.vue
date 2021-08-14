@@ -1,7 +1,7 @@
 <template>
     <div>
         <header2></header2>
-        <div class="container container max-w-screen-lg px-6 py-4 mx-auto flex">
+        <div class="container container max-w-screen-lg px-6 py-4 mx-auto flex flex-col md:flex-row">
             <detailhome class="flex-initial mr-2"></detailhome>
             <createOrder class="flex-initial ml-2 "></createOrder>
         </div>

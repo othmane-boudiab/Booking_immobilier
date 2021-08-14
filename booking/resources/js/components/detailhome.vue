@@ -23,7 +23,7 @@
         <div class="content">
             <div>
                 <h1 class=" font-bold text-4xl mt-4">{{homes.title}}</h1>
-                <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center justify-between flex-wrap mt-4">
                     <div class="">
                             <h3 class="font-medium">Mis à jour le :</h3>
                             <p>{{homes.updated_at}}</p>
@@ -63,7 +63,7 @@
                                 <span>{{homes.adress}}</span>
                             </div>
                         </div>
-                        <a href="#" class="bg-blue-600 px-2 py-1 rounded-sm text-white">Ouvrir dans Google Maps</a>
+                        <!-- <a href="#" class="bg-blue-600 px-2 py-1 rounded-sm text-white">Ouvrir dans Google Maps</a> -->
                     </div>
                 </div>
             </div>

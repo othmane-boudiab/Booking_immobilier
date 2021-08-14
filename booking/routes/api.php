@@ -33,6 +33,8 @@ Route::group(['prefix' => 'auth'], function () {
     // Route::resource('register', 'AuthController');
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
+    Route::get('service', 'ServiceController@index');
+    Route::get('story', 'TemoignageController@index');
     // Route::get('users', 'AuthController@index');
     // Route::get('users', 'AuthController@index')->middleware('scope:do-any');
     Route::post('addagent', 'AuthController@addagent');
@@ -51,7 +53,8 @@ Route::group(['prefix' => 'auth'], function () {
     // Route::get('getCategories', [PostController::class, 'getCategories']);
 
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('store', 'CommandeController@store');
+        Route::get('store', 'CommandeController@store')->middleware('scope:can_crud_home');
+        Route::get('getallorder', 'CommandeController@getallorder')->middleware('scope:do_any');
         Route::post('create', 'CommandeController@create');
         Route::get('edithomes/{id}', 'PostController@edithomes');
         Route::get('logout', 'AuthController@logout');

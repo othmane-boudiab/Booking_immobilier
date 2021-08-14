@@ -11,8 +11,9 @@
                     <router-link to="/agents" class="text-white px-2 hover:text-yellow-400">Agent</router-link>
                     <router-link to="/a_propos" class="text-white px-2 hover:text-yellow-400">À propos</router-link>
                     <router-link to="/contactez-nous" class="text-white pl-2 hover:text-yellow-400">Contactez-nous</router-link>
-                    <router-link to="/login" class=" text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2">Login</router-link>
-                    <router-link to="/register" class=" text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2">Register</router-link>
+                    <router-link to="/login" class=" text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2" v-if="!isLogged">Login</router-link>
+                    <router-link to="/register" class=" text-white bg-blue-500 px-2 py-1.5 rounded-sm hover:bg-blue-700 ml-2" v-if="!isLogged">Register</router-link>
+                    <a @click="logout" class=" text-white bg-blue-500 px-2 py-1.5 cursor-pointer rounded-sm hover:bg-blue-700 ml-2" v-if="isLogged">Logout</a>
                 </div>
                 <!-- Mobile menu button -->
                     <div class="md:hidden w-8 ">
@@ -60,6 +61,23 @@
 </style>
 <script>
 export default {
+    mounted() {
+        this.updateToken();
+    },
+    methods: {
+        logout(){
+            this.$store.commit('logout')
+        },
+        updateToken(){
+            let token =JSON.parse(localStorage.getItem('userToken'));
+            this.$store.commit('setUserToken',token)
+        },
+    },
+    computed: {
+        isLogged(){
+          return this.$store.getters.isLogged;
+        },
+    }
 
 }
 </script>

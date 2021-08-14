@@ -19,7 +19,7 @@
                     <li class="flex cursor-pointer items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"><router-link to="/dashboard/homes"><i class="fas fa-home mr-2"></i>homes</router-link></li>
                     <li class="flex cursor-pointer items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"><i class="fas fa-window-restore mr-2"></i>Nos services</li>
                     <li class="flex cursor-pointer items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"><router-link to="/dashboard/commande"><i class="fas fa-hands-helping mr-2"></i>Commande</router-link></li>
-                    <li class="flex cursor-pointer items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"><i class="fas fa-sign-out-alt mr-2"></i>Logout</li>
+                    <li class="flex cursor-pointer items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" @click.stop="logout"><i class="fas fa-sign-out-alt mr-2"></i>Logout</li>
                 </ul>
             </nav>
         </div>
@@ -152,11 +152,30 @@ export default {
     },
     created(){
         this.updateToken();
+        this.upuser();
     },
     methods : {
         updateToken(){
             let token =JSON.parse(localStorage.getItem('userToken'));
-            this.$store.commit('setUserToken',token)
+            this.$store.commit('setUserToken',token);
+            // console.log(token)
+        },
+        upuser(){
+            let user =JSON.parse(localStorage.getItem('user'));
+            this.$store.commit('setuser',user)
+            console.log(user)
+        },
+        // isadmin(){
+        //     let adime = JSON.parse(localStorage.getItem('user'));
+        //     // console.log(localStorage.getItem('user'));
+        //     // if ()
+        // },
+        logout(){
+            this.$store.commit('logout')
+            
+        },
+        setuser(){
+
         }
     },
 //     computed:{

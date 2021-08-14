@@ -70,7 +70,7 @@ export default {
      submitLogin(){
        let {email,password} = this;
             this.$store.dispatch('LoginUser',{email,password});
-            this.$router.push({name: 'dashboard'});
+            // this.$router.push({name: 'dashboard'});
             
             
             // this.submitLogin();

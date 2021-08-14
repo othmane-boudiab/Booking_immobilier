@@ -96,6 +96,7 @@ export default {
     },
     mounted() {
         this.getorder();
+        this.getallorder();
     },
     methods:{
     // toggleModal: function(){
@@ -124,20 +125,20 @@ export default {
       )
       .then(err => console.log(err))
     },
-    // getallhomes() {
-    //   axios.get('http://localhost:8000/api/auth/getallhomes')
-    //   .then(res => {
-    //     this.homes = res.data;
-    //     console.log(res.data);
-    //   }
-    //   )
-    //   .then(err => console.log(err))
-    // },
+    getallorder() {
+      axios.get('http://localhost:8000/api/auth/getallorder')
+      .then(res => {
+        this.orders = res.data;
+        console.log(res.data);
+      }
+      )
+      .then(err => console.log(err))
+    },
     // edituser(val){
-		// 	this.$store.commit('Edituser',val)
+	// 		this.$store.commit('Edituser',val)
     //   // console.log(this.name)
     //   console.log(this.val.name)
-		// },
+	// 	},
     
   },
 }

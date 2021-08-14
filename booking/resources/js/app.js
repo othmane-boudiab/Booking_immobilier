@@ -17,20 +17,22 @@ export { store };
 // const router = new VueRouter(routes)
 // const passRoutes = ["login","register"]
 // router.beforeEach((to, from, next) => {
-    // if(passRoutes.includes(to.name)) return next();
-    // if(localStorage.getItem('userToken') == null){
-    //     router.push('login')
-    // }
-    // if (!store.getters.isLogged) {
-    //     router.push('login')
-    // }
-    // if (!store.getters.isLogged) {
-    //           return next({
-    //             name:'login'
-    //           })
-    //         }
-    //         next()
-    // next()
+//     if(passRoutes.includes(to.name)) return next();
+//     if(localStorage.getItem('userToken') == null){
+//         router.push('login')
+
+//     }
+//     // console.log(store.getters.typeuser)
+//     // if (!store.getters.isLogged) {
+//     //     router.push('login')
+//     // }
+//     // if (!store.getters.isLogged) {
+//     //           return next({
+//     //             name:'login'
+//     //           })
+//     //         }
+//     //         next()
+//     next()
 // })
 // console.log(this.store.state.user)
 
@@ -49,10 +51,11 @@ const store = new Vuex.Store({
             return !!state.userToken ;
         },
         typeuser(state) {
-            if (state.user) {
-                return state.user
+            if (state.user ) {
+                return state.user;
             }
-            return null
+            // return null
+            // return state.user;
 
         },
         // userToEdit(state) {
@@ -69,21 +72,22 @@ const store = new Vuex.Store({
             axios.defaults.headers.common.Authorization = `Bearer ${userToken}`;
             // axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('userToken')}`
         },
-        removeUserToken(state) {
-            state.userToken = null;
-            localStorage.removeItem('userToken')
-        },
-        setstateUser(state, user) {
-            state.user = user;
-            // if (state.user) {
-            //     localStorage.setItem('user', JSON.stringify(user));
-            // }
-        },
-        // logout(state) {
+        // removeUserToken(state) {
         //     state.userToken = null;
-        //     localStorage.removeItem('userToken');
-        //     window.location.pathname = "/"
+        //     localStorage.removeItem('userToken')
         // },
+        setuser(state, user) {
+            state.user = user;
+            if (state.user) {
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+        },
+        logout(state) {
+            state.userToken = null;
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('user');
+            window.location.pathname = "/"
+        },
         // Edituser(state,val) {
         //     state.Editeduser = val;
         //     console.log(val)
@@ -116,17 +120,20 @@ const store = new Vuex.Store({
                     console.log(res)
                     commit('setUserToken', res.data.access_token)
 
-                    commit('setstateUser', res.data.token_scope)
+                    // commit('setstateUser', res.data.token_scope)
                     // const router = new VueRouter(routes)
                     // if (res.data.token_scope == 'do_any'){
                     //     // window.location.pathname = "/Dashboard/users";
                     //     router.push('dashboard')
                     //     // router.push({ path: '/dashboard' })
                     // }
+                    // commit('setuser', res.data.token_scope)
+                    
 
-                    // console.log(setstateUser)
-                    // console.log(this.state.user)
-                    // console.log(res.data.user.type)
+
+                    console.log(res.data.token_scope)
+                    // console.log(res.data.token_scope)
+                    // console.log(res.data.access_tokentoken_scope)
 
                     // console.log(axios.defaults.headers.common.Authorization)
 
@@ -141,12 +148,13 @@ const store = new Vuex.Store({
                     // })
                     // const router = new VueRouter(routes)
 
-                    if (this.state.user == 'do_any'){
-                        
+                    if (res.data.token_scope == 'do_any'){
+                        commit('setuser', res.data.token_scope)
                         // router.push({ path: '/Dashboard/users' })
                         window.location.pathname = "/Dashboard/users";
-                    }else if (this.state.user == 'can_crud_home'){
+                    }else if (res.data.token_scope == 'can_crud_home'){
                         window.location.pathname = "/Dashboard/homes";
+                        commit('setuser', res.data.token_scope)
                     }else {
                         window.location.pathname = "/";
                     }

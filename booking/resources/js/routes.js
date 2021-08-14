@@ -65,12 +65,22 @@ export default {
             //     }
             //     next()
             //   },
+            // store.getters['app/setuser'] == 'can_creat_ord'
+            // console.Login(store.getters.typeuser)
             beforeEnter:(to,from,next) => {
-                if (localStorage.getItem('userToken') == null ) {
+                // console.Login(store.getters.typeuser)
+
+                if (localStorage.getItem('userToken') == null || localStorage.getItem('user') == null) {
+
                   return next({
                     name:'login'
                   })
                 }
+                // if (localStorage.getItem('user') == 'can_creat_ord') {
+                //     return next({
+                //       name:'/'
+                //     })
+                //   }
                 
                 next()
               },
@@ -85,7 +95,7 @@ export default {
                     path: 'users',
                     component: Users,
                     // beforeEnter:(to,from,next) => {
-                    //     if (localStorage.getItem('userToken') == null && localStorage.getItem('usertype') == 'do_any') {
+                    //     if (localStorage.getItem('usertype') == 'can_creat_ord') {
                     //       return next({
                     //         name:'login'
                     //       })

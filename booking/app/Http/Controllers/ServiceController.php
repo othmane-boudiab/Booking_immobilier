@@ -14,8 +14,14 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $service = Service::get();
+        return $service;
     }
+
+    // public function getallorder(){
+    //     $order= Commande::with(['user'])->get();
+    //     return response()->json($order);
+    // }
 
     /**
      * Show the form for creating a new resource.

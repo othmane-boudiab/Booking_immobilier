@@ -14,7 +14,8 @@ class TemoignageController extends Controller
      */
     public function index()
     {
-        //
+        $story = Temoignage::get();
+        return $story;
     }
 
     /**

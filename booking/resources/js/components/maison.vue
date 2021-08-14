@@ -1,7 +1,7 @@
 <template>
-    <div class="grid grid-flow-col grid-cols-3 grid-rows-2 gap-4 mt-10">
-        <div v-for="val in homes" :key="val.id">
-        <div class="hover:bg-blue-900 relative" >
+    <div class=" grid md:grid-cols-3 sm:grid-cols-2 gap-4 mt-10 ">
+        <div v-for="val in homes" :key="val.id" class="hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
+        <div class="hover:bg-blue-900 relative " >
             <img :src="/image/+val.image" class="bg-cover mix-blend-multiply w-screen" alt="">
             <div class="border-blue-50 rounded-full p2 ">
                 <i class="fas fa-plus absolute text-white translate-x-1/2 translate-y-1/2 text-3xl opacity-75"></i>

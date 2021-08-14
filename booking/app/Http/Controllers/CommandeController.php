@@ -54,6 +54,11 @@ class CommandeController extends Controller
         return $order;
     }
 
+    public function getallorder(){
+        $order= Commande::with(['user'])->get();
+        return response()->json($order);
+    }
+
     /**
      * Display the specified resource.
      *

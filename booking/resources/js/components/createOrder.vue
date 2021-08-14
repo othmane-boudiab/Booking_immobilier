@@ -2,6 +2,9 @@
     <div class="p-2 shadow h-full">
         <div>
             <h2 class="mb-6">Contactez Agents</h2>
+            <div v-if="!isLogged" class=" w-full lg:w-44">
+                <router-link class="text-blue-600" to="/login">sign in</router-link> pour Contactez Agent
+            </div>
             <form action="" enctype="multipart/form-data" v-if="isLogged" novalidate>
                     <div class="mb-6">
                         <!-- <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Name</label> -->
